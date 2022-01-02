@@ -1,0 +1,33 @@
+{
+  "name": "css-code-quality-calculator",
+  "description": "Calculate the Code Quality score of your CSS based on a range of different quality guards",
+  "keywords": [
+    "css",
+    "codequality",
+    "codesniffer",
+    "quality",
+    "complexity",
+    "performance",
+    "maintainability"
+  ],
+  "author": {
+    "email": "bart@projectwallace.com",
+    "name": "Bart Veneman"
+  },
+  "version": "0.0.0",
+  "type": "module",
+  "main": "src/index.js",
+  "repository": "TODO",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "uvu"
+  },
+  "dependencies": {
+    "@projectwallace/css-analyzer": "^5.0.0"
+  },
+  "devDependencies": {
+    "uvu": "^0.5.2"
+  }
+}
