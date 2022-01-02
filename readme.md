@@ -15,7 +15,6 @@ This package scores your CSS on several criteria and comes up with a score.
   * Number of rules with more selectors than mode selectors per rule
   * Number of rules with more declarations than mode declarations per rule
   * Range of selector complexity
-  * % of unique declarations (duplication)
 * Complexity
   * Selector complexity  (total/mode)
   * Selector specificity

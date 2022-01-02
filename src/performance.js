@@ -1,20 +1,23 @@
 const guards = [
+
+  // Should not contain @import rules
   result => ({
-    id: 'NoImports',
-    description: 'Should not contain @import rules',
+    id: 'Imports',
     score: result.atrules.import.total * 10,
     value: Object.keys(result.atrules.import.unique),
   }),
+
+  // Should not contain empty rules
   result => ({
-    id: 'NoEmptyRules',
-    description: 'Should not contain empty rules',
+    id: 'EmptyRules',
     score: result.rules.empty.total,
-    value: result.rules.empty.total
+    value: result.rules.empty.total,
   }),
+
+  // Too many selectors appear multiple times
   result => {
     const outcome = {
-      id: 'TooManySelectorDuplications',
-      description: 'Too many selectors appear multiple times',
+      id: 'SelectorDuplications',
       score: 0,
       value: result.selectors.uniquenessRatio,
     }
@@ -29,10 +32,11 @@ const guards = [
 
     return outcome
   },
+
+  // Too many declarations appear multiple times
   result => {
     const outcome = {
-      id: 'TooManyDeclarationDuplications',
-      description: 'Too many declarations appear multiple times',
+      id: 'DeclarationDuplications',
       score: 0,
       value: result.declarations.unique.ratio,
     }
@@ -47,45 +51,13 @@ const guards = [
 
     return outcome
   },
+
+  // The total amount of CSS should not be too high
   result => ({
-    id: 'TooMuchCSS',
-    description: 'There is too much CSS',
+    id: 'CssSize',
     score: result.stylesheet.size > 200_000 ? 5 : 0,
     value: result.stylesheet.size,
   })
 ]
 
-function calculatePerformanceScore(result) {
-  let score = 100
-  let violations = []
-  let passes = []
-
-  for (const guard of guards) {
-    const outcome = guard(result)
-
-    if (outcome.score > 0) {
-      score -= outcome.score
-
-      violations.push({
-        id: outcome.id,
-        score: outcome.score,
-        description: outcome.description,
-        value: outcome.value,
-      })
-    } else {
-      passes.push({
-        id: outcome.id,
-        description: outcome.description,
-        value: outcome.value,
-      })
-    }
-  }
-
-  return {
-    score,
-    violations,
-    passes,
-  }
-}
-
-export { calculatePerformanceScore }
+export { guards }

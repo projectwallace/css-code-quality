@@ -20,8 +20,7 @@ Performance('deducts points for having a single @import', () => {
   assert.is(actual.performance.score, 90)
   assert.equal(actual.performance.violations, [
     {
-      id: 'NoImports',
-      description: 'Should not contain @import rules',
+      id: 'Imports',
       value: [`url('some-url')`],
       score: 10,
     },
@@ -37,8 +36,7 @@ Performance('deducts points for having multiple @imports', () => {
   assert.is(actual.performance.score, 80)
   assert.equal(actual.performance.violations, [
     {
-      id: 'NoImports',
-      description: 'Should not contain @import rules',
+      id: 'Imports',
       value: [
         `url('some-url')`,
         `url('another-url')`,
@@ -69,6 +67,13 @@ Performance('deducts points for having multiple empty rules', () => {
     test { color: green; }
   `)
   assert.is(actual.performance.score, 98)
+  assert.equal(actual.performance.violations, [
+    {
+      id: 'EmptyRules',
+      score: 2,
+      value: 2,
+    },
+  ])
 })
 
 Performance('does not deduct points for having unique selectors', () => {
@@ -86,6 +91,13 @@ Performance('deducts points for having low selector uniqueness', () => {
     test2 { color: blue; }
   `)
   assert.is(actual.performance.score, 97)
+  assert.equal(actual.performance.violations, [
+    {
+      id: 'SelectorDuplications',
+      score: 3,
+      value: 2 / 3
+    },
+  ])
 })
 
 Performance('does not deduct points for having unique declarations', () => {
@@ -103,6 +115,13 @@ Performance('deducts points for having low declaration uniqueness', () => {
     test3 { color: red; }
   `)
   assert.is(actual.performance.score, 97)
+  assert.equal(actual.performance.violations, [
+    {
+      id: 'DeclarationDuplications',
+      score: 3,
+      value: 2 / 3
+    }
+  ])
 })
 
 Performance('does not deduct points for small stylesheets', () => {
@@ -115,7 +134,7 @@ Performance('does not deduct points for small stylesheets', () => {
 Performance('deducts points for large stylesheets', () => {
   const fixture = new Array(10_000)
     .fill('')
-    .map((_, index) => `selector-${index} { opacity: 0.0${index}}`)
+    .map((_, index) => `selector-${index} { opacity: 0.${index}}`)
     .join('')
   const actual = calculate(fixture)
 
