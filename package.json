@@ -10,24 +10,33 @@
     "performance",
     "maintainability"
   ],
+  "repository": "TODO",
+  "files": [
+    "dist"
+  ],
   "author": {
     "email": "bart@projectwallace.com",
     "name": "Bart Veneman"
   },
   "version": "0.0.0",
   "type": "module",
-  "main": "src/index.js",
-  "repository": "TODO",
-  "files": [
-    "dist"
-  ],
+  "source": "src/index.js",
+  "main": "./dist/css-code-quality.cjs",
+  "module": "./dist/css-code-quality.module.js",
+  "unpkg": "./dist/css-code-quality.umd.js",
+  "exports": {
+    "require": "./dist/css-code-quality.cjs",
+    "default": "./dist/css-code-quality.modern.js"
+  },
   "scripts": {
-    "test": "uvu"
+    "test": "uvu",
+    "build": "microbundle --external=none"
   },
   "dependencies": {
     "@projectwallace/css-analyzer": "^5.0.0"
   },
   "devDependencies": {
+    "microbundle": "^0.14.2",
     "uvu": "^0.5.2"
   }
 }
