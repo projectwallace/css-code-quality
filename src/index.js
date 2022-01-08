@@ -41,8 +41,8 @@ function calculate(css) {
 
   return {
     score: 0,
-    violations: [].concat(performance.violations).concat(maintainability.violations),
-    passes: [].concat(performance.passes).concat(maintainability.passes),
+    violations: performance.violations.concat(maintainability.violations),
+    passes: performance.passes.concat(maintainability.passes),
     performance,
     maintainability,
     complexity: {},
