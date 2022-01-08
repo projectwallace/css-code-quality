@@ -8,14 +8,14 @@
 
 This package scores your CSS on several criteria and comes up with a score.
 
-- [ ] Maintainability
+- [x] Maintainability
   - [x] Source lines of code
-  - [ ] Average # selectors per rule
-  - [ ] Max # selectors per rule
-  - [ ] Average # declarations per rule
-  - [ ] Max # declarations per rule
-  - [ ] Number (or %) of rules with more selectors than mode selectors per rule
-  - [ ] Number (or %) of rules with more declarations than mode declarations per rule
+  - [x] Average # selectors per rule
+  - [x] Max # selectors per rule
+  - [x] Average # declarations per rule
+  - [x] Max # declarations per rule
+  - [x] Number (or %) of rules with more selectors than mode selectors per rule
+  - [x] Number (or %) of rules with more declarations than mode declarations per rule
 - [ ] Complexity
   - [ ] Selector complexity (total/mode)
   - [ ] Selector specificity
