@@ -10,7 +10,8 @@ const guards = [
 
     if (result.stylesheet.sourceLinesOfCode > 10000) {
       // deduct 1 point per 1000 lines of code over 10,000
-      outcome.score = Math.floor((result.stylesheet.sourceLinesOfCode - 10000) / 1000)
+      const score = Math.floor((result.stylesheet.sourceLinesOfCode - 10000) / 1000)
+      outcome.score = Math.min(15, score)
     }
 
     return outcome
@@ -28,7 +29,8 @@ const guards = [
 
     // Deduct 5 points per selector over 2
     if (result.rules.selectors.mean > ALLOWED_SELECTORS_PER_RULESET) {
-      outcome.score = Math.floor((result.rules.selectors.mean - ALLOWED_SELECTORS_PER_RULESET) * 5)
+      const score = Math.floor((result.rules.selectors.mean - ALLOWED_SELECTORS_PER_RULESET) * 5)
+      outcome.score = Math.min(15, score)
     }
 
     return outcome
@@ -46,7 +48,8 @@ const guards = [
 
     // Deduct 5 points per declaration over 5
     if (result.rules.declarations.mean > ALLOWED_DECLARATIONS_PER_RULESET) {
-      outcome.score = Math.floor((result.rules.declarations.mean - ALLOWED_DECLARATIONS_PER_RULESET) * 5)
+      const score = Math.floor((result.rules.declarations.mean - ALLOWED_DECLARATIONS_PER_RULESET) * 5)
+      outcome.score = Math.min(15, 0)
     }
 
     return outcome
@@ -64,7 +67,8 @@ const guards = [
 
     // Deduct 0.5 points per selectors over 10
     if (result.rules.selectors.max > MAX_SELECTORS_PER_RULESET) {
-      outcome.score = Math.ceil((result.rules.selectors.max - MAX_SELECTORS_PER_RULESET) * 0.5)
+      const score = Math.ceil((result.rules.selectors.max - MAX_SELECTORS_PER_RULESET) * 0.5)
+      outcome.score = Math.min(score, 15)
     }
 
     return outcome
@@ -82,7 +86,8 @@ const guards = [
 
     // Deduct 0.5 points per declarations over 10
     if (result.rules.declarations.max > MAX_DECLARATIONS_PER_RULESET) {
-      outcome.score = Math.ceil((result.rules.declarations.max - MAX_DECLARATIONS_PER_RULESET) * 0.5)
+      const score = Math.ceil((result.rules.declarations.max - MAX_DECLARATIONS_PER_RULESET) * 0.5)
+      outcome.score = Math.min(15, score)
     }
 
     return outcome
@@ -105,7 +110,7 @@ const guards = [
       // then deduct 0.01 for ever applicable RuleSet
       const score = Math.floor(rulesHavingMoreThanMode * 0.01)
       // with a maximum of 10 points
-      outcome.score = Math.min(10, score)
+      outcome.score = Math.min(15, score)
     }
 
     return outcome
@@ -128,7 +133,7 @@ const guards = [
       // then deduct 0.01 for ever applicable RuleSet
       const score = Math.floor(rulesHavingMoreThanMode * 0.01)
       // with a maximum of 10 points
-      outcome.score = Math.min(10, score)
+      outcome.score = Math.min(15, score)
     }
 
     return outcome

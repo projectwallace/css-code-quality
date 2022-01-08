@@ -23,10 +23,6 @@ const guards = [
     }
 
     if (result.selectors.uniquenessRatio < 0.75) {
-      // Math.floor((1 - 0.75)*10)
-      // Math.floor(0.25 * 10)
-      // Math.floor(2.5)
-      // 2
       outcome.score = Math.floor((1 - result.selectors.uniquenessRatio) * 10)
     }
 
@@ -42,10 +38,6 @@ const guards = [
     }
 
     if (result.declarations.unique.ratio < 0.75) {
-      // Math.floor((1 - 0.75)*10)
-      // Math.floor(0.25 * 10)
-      // Math.floor(2.5)
-      // 2
       outcome.score = Math.floor((1 - result.declarations.unique.ratio) * 10)
     }
 
