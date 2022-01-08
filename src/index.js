@@ -27,7 +27,7 @@ function calculateScore({ result, guards }) {
   }
 
   return {
-    score,
+    score: Math.max(score, 0),
     violations,
     passes,
   }
@@ -38,6 +38,7 @@ function calculate(css) {
 
   const performance = calculateScore({ result, guards: performanceGuards })
   const maintainability = calculateScore({ result, guards: maintainabilityGuards })
+  const complexity = calculateScore({ result, guards: [] })
 
   return {
     score: 0,
@@ -45,7 +46,7 @@ function calculate(css) {
     passes: performance.passes.concat(maintainability.passes),
     performance,
     maintainability,
-    complexity: {},
+    complexity,
   }
 }
 
