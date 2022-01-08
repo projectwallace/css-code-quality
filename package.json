@@ -37,6 +37,6 @@
   },
   "devDependencies": {
     "microbundle": "^0.14.2",
-    "uvu": "^0.5.2"
+    "uvu": "^0.5.3"
   }
 }
