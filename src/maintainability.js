@@ -20,16 +20,17 @@ const guards = [
   // Average count of Selectors per RuleSet should be low
   result => {
     const ALLOWED_SELECTORS_PER_RULESET = 2
+    const actual = result.rules.selectors.mean
 
     const outcome = {
       id: 'AverageSelectorsPerRule',
       score: 0,
-      value: result.rules.selectors.mean,
+      value: actual,
     }
 
     // Deduct 5 points per selector over 2
-    if (result.rules.selectors.mean > ALLOWED_SELECTORS_PER_RULESET) {
-      const score = Math.floor((result.rules.selectors.mean - ALLOWED_SELECTORS_PER_RULESET) * 5)
+    if (actual > ALLOWED_SELECTORS_PER_RULESET) {
+      const score = Math.floor((actual - ALLOWED_SELECTORS_PER_RULESET) * 5)
       outcome.score = Math.min(15, score)
     }
 
@@ -74,7 +75,7 @@ const guards = [
     return outcome
   },
 
-  // Max number of Selectors per Rule should be low
+  // Max number of Declarations per Rule should be low
   result => {
     const MAX_DECLARATIONS_PER_RULESET = 10
 
@@ -97,7 +98,9 @@ const guards = [
   // Selectors per RuleSet
   result => {
     const mode = result.rules.selectors.mode
-    const rulesHavingMoreThanMode = result.rules.selectors.items.filter(item => item > mode).length
+    const rulesHavingMoreThanMode = result.rules.selectors.items
+      .filter(item => item > mode)
+      .length
 
     const outcome = {
       id: 'MoreThanMostCommonSelectorsPerRule',
