@@ -88,14 +88,15 @@ Performance('deducts points for having low selector uniqueness', () => {
   const actual = calculate(`
     test1 { color: green; }
     test1 { color: red; }
+    test2 { color: magenta; }
     test2 { color: blue; }
   `)
-  assert.is(actual.performance.score, 97)
+  assert.is(actual.performance.score, 95)
   assert.equal(actual.performance.violations, [
     {
       id: 'SelectorDuplications',
-      score: 3,
-      value: 2 / 3
+      score: 5,
+      value: 2 / 4
     },
   ])
 })
@@ -113,13 +114,14 @@ Performance('deducts points for having low declaration uniqueness', () => {
     test1 { color: green; }
     test2 { color: green; }
     test3 { color: red; }
+    test4 { color: red; }
   `)
-  assert.is(actual.performance.score, 97)
+  assert.is(actual.performance.score, 95)
   assert.equal(actual.performance.violations, [
     {
       id: 'DeclarationDuplications',
-      score: 3,
-      value: 2 / 3
+      score: 5,
+      value: 2 / 4
     }
   ])
 })

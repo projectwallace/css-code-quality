@@ -22,7 +22,7 @@ const guards = [
       value: result.selectors.uniquenessRatio,
     }
 
-    if (result.selectors.uniquenessRatio < 0.75) {
+    if (result.selectors.uniquenessRatio < 0.66) {
       outcome.score = Math.floor((1 - result.selectors.uniquenessRatio) * 10)
     }
 
@@ -37,7 +37,7 @@ const guards = [
       value: result.declarations.unique.ratio,
     }
 
-    if (result.declarations.unique.ratio < 0.75) {
+    if (result.declarations.unique.ratio < 0.66) {
       outcome.score = Math.floor((1 - result.declarations.unique.ratio) * 10)
     }
 
