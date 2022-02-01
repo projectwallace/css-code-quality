@@ -1,6 +1,12 @@
 {
-  "name": "css-code-quality-calculator",
+  "name": "@projectwallace/css-code-quality",
   "description": "Calculate the Code Quality score of your CSS based on a range of different quality guards",
+  "version": "0.0.0",
+  "repository": "git@github.com:projectwallace/css-code-quality.git",
+  "author": {
+    "email": "bart@projectwallace.com",
+    "name": "Bart Veneman"
+  },
   "keywords": [
     "css",
     "codequality",
@@ -10,15 +16,9 @@
     "performance",
     "maintainability"
   ],
-  "repository": "TODO",
   "files": [
     "dist"
   ],
-  "author": {
-    "email": "bart@projectwallace.com",
-    "name": "Bart Veneman"
-  },
-  "version": "0.0.0",
   "type": "module",
   "source": "src/index.js",
   "main": "./dist/css-code-quality.cjs",
@@ -33,7 +33,7 @@
     "build": "microbundle --external=none"
   },
   "dependencies": {
-    "@projectwallace/css-analyzer": "^5.0.0"
+    "@projectwallace/css-analyzer": "^5.0.2"
   },
   "devDependencies": {
     "microbundle": "^0.14.2",

@@ -4,7 +4,7 @@ const guards = [
   result => ({
     id: 'Imports',
     score: result.atrules.import.total * 10,
-    value: Object.keys(result.atrules.import.unique),
+    value: result.atrules.import.total,
   }),
 
   // Should not contain empty rules
@@ -19,7 +19,7 @@ const guards = [
     const outcome = {
       id: 'SelectorDuplications',
       score: 0,
-      value: result.selectors.uniquenessRatio,
+      value: 1 - result.selectors.uniquenessRatio,
     }
 
     if (result.selectors.uniquenessRatio < 0.66) {
@@ -34,7 +34,7 @@ const guards = [
     const outcome = {
       id: 'DeclarationDuplications',
       score: 0,
-      value: result.declarations.unique.ratio,
+      value: 1 - result.declarations.unique.ratio,
     }
 
     if (result.declarations.unique.ratio < 0.66) {

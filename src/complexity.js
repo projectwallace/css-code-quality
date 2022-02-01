@@ -12,7 +12,7 @@ const guards = [
     const outcome = {
       id: 'MoreThanMostCommonSelectorComplexity',
       score: 0,
-      value: mode,
+      value: result.selectors.total === 0 ? 0 : selectorsAboveMode / result.selectors.total,
     }
 
     if (selectorsAboveMode > result.selectors.total * 0.1) {
@@ -33,7 +33,7 @@ const guards = [
     const outcome = {
       id: 'MoreThanMostCommonSelectorSpecificity',
       score: 0,
-      value: mode,
+      value: result.selectors.total === 0 ? 0 : selectorsAboveMode / result.selectors.total,
     }
 
     if (selectorsAboveMode > result.selectors.total * 0.1) {
