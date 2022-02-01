@@ -1,7 +1,7 @@
 # CSS Code Quality calculator
 
 <div align="center">
-  <img src="logo.svg" height="160" width="160" alt="Analyzer logo">
+  <img src="logo.png" height="160" width="160" alt="Analyzer logo">
 </div>
 
 <div align="center">
