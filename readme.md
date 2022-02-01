@@ -20,6 +20,8 @@
   Calculate the Code Quality score of your CSS based on a range of different quality guards.
 </div>
 
+---
+
 This package analyzes your CSS on a high level and comes up with a score, divided in three areas:
 
 - **Maintainability**: how difficult is it for someone looking at the CSS from a high level to find the exact spot to fix a bug?
