@@ -25,7 +25,3 @@ This package analyzes your CSS on a high level and comes up with a score, divide
 - **Maintainability**: how difficult is it for someone looking at the CSS from a high level to find the exact spot to fix a bug?
 - **Complexity**: how difficult is it for someone to make a change and them being confident that they can make that change without side-effects?
 - **Performance**: How likely is the CSS to have a negative impact on performance, based on high-level metrics? (Not including using hardware accelerated transforms and the like, because other tools are more suite for that.)
-
-### Metrics for consideration
-
-- [ ] Performance: Size and % of embedded base64 content
