@@ -33,7 +33,7 @@
     "build": "microbundle --external=none"
   },
   "dependencies": {
-    "@projectwallace/css-analyzer": "^5.0.2"
+    "@projectwallace/css-analyzer": "^5.1.0"
   },
   "devDependencies": {
     "microbundle": "^0.14.2",

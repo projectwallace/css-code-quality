@@ -24,7 +24,7 @@ Complexity('should deduct points for a lot of Selectors more complex than most c
     {
       id: 'MoreThanMostCommonSelectorComplexity',
       score: 5,
-      value: 1,
+      value: 1 / 3,
     }
   ])
   assert.is(actual.complexity.score, 95)
@@ -50,7 +50,7 @@ Complexity('should deduct points for a lot of Selectors more complex than most c
     {
       id: 'MoreThanMostCommonSelectorSpecificity',
       score: 2,
-      value: [0, 0, 1],
+      value: 200 / 700,
     }
   ])
   assert.is(actual.complexity.score, 98)
