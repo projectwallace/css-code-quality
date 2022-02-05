@@ -28,9 +28,10 @@
     "require": "./dist/css-code-quality.cjs",
     "default": "./dist/css-code-quality.modern.js"
   },
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "uvu",
-    "build": "microbundle --external=none"
+    "build": "microbundle"
   },
   "dependencies": {
     "@projectwallace/css-analyzer": "^5.1.0"

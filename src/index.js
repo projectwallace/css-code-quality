@@ -9,6 +9,7 @@ function calculateScore({ result, guards }) {
   let passes = []
 
   for (const guard of guards) {
+    /** @type {{score: number, actual: number, id: string}} */
     const outcome = guard(result)
 
     if (outcome.score > 0) {
