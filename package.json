@@ -34,10 +34,10 @@
     "build": "microbundle"
   },
   "dependencies": {
-    "@projectwallace/css-analyzer": "^5.1.0"
+    "@projectwallace/css-analyzer": "^5.5.0"
   },
   "devDependencies": {
-    "microbundle": "^0.14.2",
+    "microbundle": "^0.15.0",
     "uvu": "^0.5.3"
   }
 }
