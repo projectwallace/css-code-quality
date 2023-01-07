@@ -26,6 +26,7 @@ const guards = [
       id: 'AverageSelectorsPerRule',
       score: 0,
       value: actual,
+      actuals: result.rules.selectors.items,
     }
 
     // Deduct 5 points per selector over 2
@@ -45,12 +46,13 @@ const guards = [
       id: 'AverageDeclarationsPerRule',
       score: 0,
       value: result.rules.declarations.mean,
+      actuals: result.rules.declarations.items,
     }
 
     // Deduct 5 points per declaration over 5
     if (result.rules.declarations.mean > ALLOWED_DECLARATIONS_PER_RULESET) {
       const score = Math.floor((result.rules.declarations.mean - ALLOWED_DECLARATIONS_PER_RULESET) * 5)
-      outcome.score = Math.min(15, 0)
+      outcome.score = Math.min(15, score)
     }
 
     return outcome
@@ -64,6 +66,7 @@ const guards = [
       id: 'MaxSelectorsPerRule',
       score: 0,
       value: result.rules.selectors.max,
+      actuals: result.rules.selectors.items,
     }
 
     // Deduct 0.5 points per selectors over 10
@@ -83,6 +86,7 @@ const guards = [
       id: 'MaxDeclarationsPerRule',
       score: 0,
       value: result.rules.declarations.max,
+      actuals: result.rules.declarations.items,
     }
 
     // Deduct 0.5 points per declarations over 10
@@ -106,6 +110,7 @@ const guards = [
       id: 'MoreThanMostCommonSelectorsPerRule',
       score: 0,
       value: result.rules.selectors.mode,
+      actuals: result.rules.selectors.items,
     }
 
     // if more than 10% of RuleSets has more Selectors than most common:
@@ -129,6 +134,7 @@ const guards = [
       id: 'MoreThanMostCommonDeclarationsPerRule',
       score: 0,
       value: result.rules.declarations.mode,
+      actuals: result.rules.declarations.items,
     }
 
     // if more than 10% of RuleSets has more Declarations than most common:

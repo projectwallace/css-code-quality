@@ -5,6 +5,7 @@ const guards = [
     id: 'Imports',
     score: result.atrules.import.total * 10,
     value: result.atrules.import.total,
+    actuals: Object.keys(result.atrules.import.unique),
   }),
 
   // Should not contain empty rules
@@ -70,6 +71,7 @@ const guards = [
       id: 'TooMuchEmbeddedContent',
       score: Math.min(20, Math.floor(size.total / 250)),
       value: size.total,
+      actuals: Object.keys(result.stylesheet.embeddedContent.unique),
     }
   },
 ]

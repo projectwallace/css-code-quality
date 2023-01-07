@@ -13,6 +13,7 @@ const guards = [
       id: 'MoreThanMostCommonSelectorComplexity',
       score: 0,
       value: result.selectors.total === 0 ? 0 : selectorsAboveMode / result.selectors.total,
+      actuals: result.selectors.complexity.items,
     }
 
     if (selectorsAboveMode > result.selectors.total * 0.1) {
@@ -34,6 +35,7 @@ const guards = [
       id: 'MoreThanMostCommonSelectorSpecificity',
       score: 0,
       value: result.selectors.total === 0 ? 0 : selectorsAboveMode / result.selectors.total,
+      actuals: result.selectors.specificity.items,
     }
 
     if (selectorsAboveMode > result.selectors.total * 0.1) {
@@ -53,6 +55,7 @@ const guards = [
       id: 'MaxSelectorComplexity',
       score: 0,
       value: result.selectors.complexity.max,
+      actuals: result.selectors.complexity.items,
     }
 
     // Deduct 0.5 points per complexity over 5, up to 5 points
@@ -73,6 +76,7 @@ const guards = [
       id: 'AverageSelectorComplexity',
       score: 0,
       value: actual,
+      actuals: result.selectors.complexity.items,
     }
 
     // Deduct 2 points per selector over 2
@@ -91,6 +95,7 @@ const guards = [
       id: 'IdSelectorRatio',
       score: 0,
       value: actual,
+      actuals: Object.keys(result.selectors.id.unique)
     }
 
     if (actual > ALLOWED) {
@@ -108,6 +113,7 @@ const guards = [
       id: 'ImportantRatio',
       score: 0,
       value: actual,
+      actuals: result.declarations.importants.total,
     }
 
     if (actual > ALLOWED) {

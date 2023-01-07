@@ -59,6 +59,7 @@ Maintainability('deducts points for having too many Selectors per RuleSet', () =
       id: 'AverageSelectorsPerRule',
       score: 12,
       value: 4.5,
+      actuals: [4, 5],
     }
   ])
 })
@@ -90,11 +91,13 @@ Maintainability('deducts points for having too many Selectors in a RuleSet', () 
       id: 'AverageSelectorsPerRule',
       score: 15,
       value: 8,
+      actuals: [15, 1],
     },
     {
       id: 'MaxSelectorsPerRule',
       score: 3,
       value: 15,
+      actuals: [15, 1],
     },
   ])
 })
@@ -114,12 +117,19 @@ Maintainability('deducts points for having too many Declarations in a single Rul
   `
   const actual = calculate(fixture)
 
-  assert.is(actual.maintainability.score, 93)
+  assert.is(actual.maintainability.score, 78)
   assert.equal(actual.maintainability.violations, [
+    {
+      id: "AverageDeclarationsPerRule",
+      score: 15,
+      value: 12,
+      actuals: [1, 23],
+    },
     {
       id: 'MaxDeclarationsPerRule',
       score: 7, // Math.ceil((23 - 10) * 0.5) === Math.ceil(6.5)
       value: 23,
+      actuals: [1, 23],
     },
   ])
 })
@@ -145,6 +155,7 @@ Maintainability('deducts points for having RuleSets with more Selectors than wha
       id: 'MoreThanMostCommonSelectorsPerRule',
       score: 5,
       value: 1,
+      actuals: (new Array(1000).fill(1)).concat(new Array(500).fill(2)),
     },
   ])
   assert.is(actual.maintainability.score, 95)
@@ -171,6 +182,7 @@ Maintainability('deducts points for having RuleSets with more Selectors than wha
       id: 'MoreThanMostCommonDeclarationsPerRule',
       score: 5,
       value: 1,
+      actuals: (new Array(1000).fill(1)).concat(new Array(500).fill(2)),
     },
   ])
   assert.is(actual.maintainability.score, 95)
