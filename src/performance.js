@@ -1,4 +1,4 @@
-const guards = [
+export const guards = [
 
   // Should not contain @import rules
   result => ({
@@ -75,5 +75,3 @@ const guards = [
     }
   },
 ]
-
-export { guards }

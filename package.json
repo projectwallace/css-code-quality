@@ -17,7 +17,8 @@
     "maintainability"
   ],
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "type": "module",
   "source": "src/index.js",
@@ -25,8 +26,13 @@
   "module": "./dist/css-code-quality.module.js",
   "unpkg": "./dist/css-code-quality.umd.js",
   "exports": {
-    "require": "./dist/css-code-quality.cjs",
-    "default": "./dist/css-code-quality.modern.js"
+    ".": {
+      "import": "./dist/css-code-quality.modern.js",
+      "require": "./dist/css-code-quality.cjs"
+    },
+    "./core": {
+      "import": "./src/core.js"
+    }
   },
   "types": "./dist/index.d.ts",
   "scripts": {

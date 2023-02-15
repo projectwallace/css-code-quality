@@ -1,4 +1,4 @@
-const guards = [
+export const guards = [
 
   // Source Lines of Code should be low'
   result => {
@@ -148,5 +148,3 @@ const guards = [
     return outcome
   },
 ]
-
-export { guards }
