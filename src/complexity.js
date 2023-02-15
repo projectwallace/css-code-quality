@@ -1,6 +1,6 @@
 import { compareSpecificity } from '@projectwallace/css-analyzer'
 
-const guards = [
+export const guards = [
 
   // Complexity per Selector should not differ too much from the most common Complexity
   result => {
@@ -124,7 +124,3 @@ const guards = [
     return outcome
   },
 ]
-
-export {
-  guards
-}
