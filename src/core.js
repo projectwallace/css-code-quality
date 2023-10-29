@@ -2,13 +2,23 @@ import { guards as performanceGuards } from './performance.js'
 import { guards as maintainabilityGuards } from './maintainability.js'
 import { guards as complexityGuards } from './complexity.js'
 
+/**
+ * @typedef Outcome
+ * @property {string} id
+ * @property {number} score
+ * @property {number} number
+ * @property {number? | number[]? | string[]?} actuals
+ */
+
 function calculateScore({ result, guards }) {
 	let score = 100
+	/** @type {Outcome[]} */
 	let violations = []
+	/** @type {Outcome[]} */
 	let passes = []
 
 	for (const guard of guards) {
-		/** @type {{score: number, value: number, id: string}} */
+		/** @type Outcome */
 		const outcome = guard(result)
 
 		if (outcome.score > 0) {
