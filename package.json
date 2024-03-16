@@ -40,7 +40,7 @@
     "build": "microbundle"
   },
   "dependencies": {
-    "@projectwallace/css-analyzer": "^5.7.1"
+    "@projectwallace/css-analyzer": "^5.14.0"
   },
   "devDependencies": {
     "microbundle": "^0.15.1",
