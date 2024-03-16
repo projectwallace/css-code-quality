@@ -11,7 +11,7 @@ Maintainability('does not deduct points for 1 SLoC', () => {
 })
 
 Maintainability('deducts points for having lots of SLoC', () => {
-  const fixture = new Array(10_000)
+  const fixture = Array.from({ length: 10_000 })
     .fill('')
     .map((_, index) => `selector-${index} { opacity: 0.${index}}`)
     .join('')
@@ -109,7 +109,7 @@ Maintainability('deducts points for having too many Declarations in a single Rul
     }
 
     selector2 {
-      ${new Array(23)
+      ${Array.from({ length: 23 })
       .fill('')
       .map(i => `z-index: ${i};`)
       .join('')
@@ -136,13 +136,13 @@ Maintainability('deducts points for having too many Declarations in a single Rul
 
 Maintainability('deducts points for having RuleSets with more Selectors than what is most common', () => {
   const fixture = `
-    ${new Array(1000)
+    ${Array.from({ length: 1000 })
       .fill('')
       .map(index => `selector-${index} {}`)
       .join('')
     }
 
-    ${new Array(500)
+    ${Array.from({ length: 500 })
       .fill('')
       .map(index => `selector-${index}a, selector-${index}-b {}`)
       .join('')
@@ -155,7 +155,7 @@ Maintainability('deducts points for having RuleSets with more Selectors than wha
       id: 'MoreThanMostCommonSelectorsPerRule',
       score: 5,
       value: 1,
-      actuals: (new Array(1000).fill(1)).concat(new Array(500).fill(2)),
+      actuals: (Array.from({ length: 1000 }).fill(1)).concat(Array.from({ length: 500 }).fill(2)),
     },
   ])
   assert.is(actual.maintainability.score, 95)
@@ -163,13 +163,13 @@ Maintainability('deducts points for having RuleSets with more Selectors than wha
 
 Maintainability('deducts points for having RuleSets with more Selectors than what is most common', () => {
   const fixture = `
-    ${new Array(1000)
+    ${Array.from({ length: 1000 })
       .fill('')
       .map(index => `selector-${index}a { z-index: ${index}; }`)
       .join('')
     }
 
-    ${new Array(500)
+    ${Array.from({ length: 500 })
       .fill('')
       .map(index => `selector-${index}b { z-index: ${index}; content: "${index}" }`)
       .join('')
@@ -182,7 +182,7 @@ Maintainability('deducts points for having RuleSets with more Selectors than wha
       id: 'MoreThanMostCommonDeclarationsPerRule',
       score: 5,
       value: 1,
-      actuals: (new Array(1000).fill(1)).concat(new Array(500).fill(2)),
+      actuals: (Array.from({ length: 1000 }).fill(1)).concat(Array.from({ length: 500 }).fill(2)),
     },
   ])
   assert.is(actual.maintainability.score, 95)

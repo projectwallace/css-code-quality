@@ -6,13 +6,13 @@ const Complexity = suite('Complexity')
 
 Complexity('should deduct points for a lot of Selectors more complex than most common Complexity', () => {
   const fixture = `
-    ${new Array(1000)
+    ${Array.from({ length: 1000 })
       .fill('')
       .map(_ => `selector { }`)
       .join('')
     }
 
-    ${new Array(500)
+    ${Array.from({ length: 500 })
       .fill('')
       .map(_ => `:where(selector) { }`)
       .join('')
@@ -25,7 +25,7 @@ Complexity('should deduct points for a lot of Selectors more complex than most c
       id: 'MoreThanMostCommonSelectorComplexity',
       score: 5,
       value: 1 / 3,
-      actuals: (new Array(1000).fill(1)).concat(new Array(500).fill(2)),
+      actuals: (Array.from({ length: 1000 }).fill(1)).concat(Array.from({ length: 500 }).fill(2)),
     }
   ])
   assert.is(actual.complexity.score, 95)
@@ -33,13 +33,13 @@ Complexity('should deduct points for a lot of Selectors more complex than most c
 
 Complexity('should deduct points for a lot of Selectors more complex than most common Specificity', () => {
   const fixture = `
-    ${new Array(500)
+    ${Array.from({ length: 500 })
       .fill('')
       .map(_ => `selector1 { }`)
       .join('')
     }
 
-    ${new Array(200)
+    ${Array.from({ length: 200 })
       .fill('')
       .map(_ => `.selector { }`)
       .join('')
@@ -52,7 +52,7 @@ Complexity('should deduct points for a lot of Selectors more complex than most c
       id: 'MoreThanMostCommonSelectorSpecificity',
       score: 2,
       value: 200 / 700,
-      actuals: (new Array(500).fill([0, 0, 1])).concat(new Array(200).fill([0, 1, 0])),
+      actuals: (Array.from({ length: 500 }).fill([0, 0, 1])).concat(Array.from({ length: 200 }).fill([0, 1, 0])),
     }
   ])
   assert.is(actual.complexity.score, 98)

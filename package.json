@@ -37,6 +37,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "uvu",
+    "lint": "oxlint",
     "build": "microbundle"
   },
   "dependencies": {
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "microbundle": "^0.15.1",
+    "oxlint": "^0.2.13",
     "uvu": "^0.5.6"
   }
 }
