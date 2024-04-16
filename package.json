@@ -1,7 +1,7 @@
 {
   "name": "@projectwallace/css-code-quality",
   "description": "Calculate the Code Quality score of your CSS based on a range of different quality guards",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "git@github.com:projectwallace/css-code-quality.git",
   "author": {
     "email": "bart@projectwallace.com",
@@ -28,7 +28,8 @@
   "exports": {
     ".": {
       "import": "./dist/css-code-quality.modern.js",
-      "require": "./dist/css-code-quality.cjs"
+      "require": "./dist/css-code-quality.cjs",
+      "types": "./dist/index.d.ts"
     },
     "./core": {
       "import": "./src/core.js"
