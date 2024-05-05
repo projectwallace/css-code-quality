@@ -14,7 +14,8 @@
     "quality",
     "complexity",
     "performance",
-    "maintainability"
+    "maintainability",
+    "score"
   ],
   "files": [
     "dist",
@@ -27,9 +28,9 @@
   "unpkg": "./dist/css-code-quality.umd.js",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/css-code-quality.modern.js",
-      "require": "./dist/css-code-quality.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/css-code-quality.cjs"
     },
     "./core": {
       "import": "./src/core.js"
