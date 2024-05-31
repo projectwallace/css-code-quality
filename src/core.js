@@ -4,7 +4,7 @@ import { guards as complexityGuards } from './complexity.js'
 
 /**
  * @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result
- * @param {Array<function(ReturnType<import('@projectwallace/css-analyzer').analyze>): {score: number, value: number, id: string, actuals?: unknown}>} guards
+ * @param {performanceGuards | maintainabilityGuards | complexityGuards} guards
  */
 function calculateScore(result, guards) {
 	let score = 100
@@ -12,7 +12,6 @@ function calculateScore(result, guards) {
 	let passes = []
 
 	for (const guard of guards) {
-		/** @type {{score: number, value: number, id: string}} */
 		const outcome = guard(result)
 
 		if (outcome.score > 0) {

@@ -1,6 +1,7 @@
 export const guards = [
 
-  // Source Lines of Code should be low'
+  // Source Lines of Code should be low
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const outcome = {
       id: 'SourceLinesOfCode',
@@ -18,6 +19,7 @@ export const guards = [
   },
 
   // Average count of Selectors per RuleSet should be low
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const ALLOWED_SELECTORS_PER_RULESET = 2
     const actual = result.rules.selectors.mean
@@ -39,6 +41,7 @@ export const guards = [
   },
 
   // Average count of Declarations per RuleSet should be low
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const ALLOWED_DECLARATIONS_PER_RULESET = 5
 
@@ -59,6 +62,7 @@ export const guards = [
   },
 
   // Max number of Selectors per Rule should be low
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const MAX_SELECTORS_PER_RULESET = 10
 
@@ -79,6 +83,7 @@ export const guards = [
   },
 
   // Max number of Declarations per Rule should be low
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const MAX_DECLARATIONS_PER_RULESET = 10
 
@@ -100,6 +105,7 @@ export const guards = [
 
   // Number of Selectors per RuleSet should not differ too much from the most common amount of
   // Selectors per RuleSet
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const mode = result.rules.selectors.mode
     const rulesHavingMoreThanMode = result.rules.selectors.items
@@ -126,6 +132,7 @@ export const guards = [
 
   // Number of Declarations per RuleSet should not differ too much from the most common amount of
   // Declarations per RuleSet
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const mode = result.rules.selectors.mode
     const rulesHavingMoreThanMode = result.rules.declarations.items.filter(item => item > mode).length
