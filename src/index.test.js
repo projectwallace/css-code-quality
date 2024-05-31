@@ -1,7 +1,7 @@
 import * as assert from 'uvu/assert'
 import { suite } from 'uvu'
 import { calculate } from './index.js'
-import { calculate as pkgCalculate } from '../dist/css-code-quality.modern.js'
+import { calculate as pkgCalculate } from '../dist/css-code-quality.js'
 
 const Index = suite('Index')
 

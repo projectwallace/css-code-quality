@@ -19,35 +19,37 @@
   ],
   "files": [
     "dist",
-    "src"
+    "src",
+    "!src/**/*.test.js"
   ],
   "type": "module",
   "source": "src/index.js",
-  "main": "./dist/css-code-quality.cjs",
-  "module": "./dist/css-code-quality.module.js",
-  "unpkg": "./dist/css-code-quality.umd.js",
+  "main": "./dist/css-code-quality.umd.cjs",
+  "module": "./dist/css-code-quality.js",
+  "unpkg": "./dist/css-code-quality.umd.cjs",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/css-code-quality.modern.js",
-      "require": "./dist/css-code-quality.cjs"
+      "import": "./dist/css-code-quality.js",
+      "require": "./dist/css-code-quality.umd.cjs"
     },
     "./core": {
+      "types": "./dist/core.d.ts",
       "import": "./src/core.js"
     }
   },
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "uvu",
-    "lint": "oxlint",
-    "build": "microbundle"
+    "build": "vite build"
   },
   "dependencies": {
     "@projectwallace/css-analyzer": "^5.14.0"
   },
   "devDependencies": {
-    "microbundle": "^0.15.1",
-    "oxlint": "^0.2.13",
-    "uvu": "^0.5.6"
+    "typescript": "^5.4.5",
+    "uvu": "^0.5.6",
+    "vite": "^5.2.12",
+    "vite-plugin-dts": "^3.9.1"
   }
 }

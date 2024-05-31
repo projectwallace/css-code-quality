@@ -2,7 +2,11 @@ import { guards as performanceGuards } from './performance.js'
 import { guards as maintainabilityGuards } from './maintainability.js'
 import { guards as complexityGuards } from './complexity.js'
 
-function calculateScore({ result, guards }) {
+/**
+ * @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result
+ * @param {Array<function(ReturnType<import('@projectwallace/css-analyzer').analyze>): {score: number, value: number, id: string, actuals?: unknown}>} guards
+ */
+function calculateScore(result, guards) {
 	let score = 100
 	let violations = []
 	let passes = []
@@ -26,11 +30,13 @@ function calculateScore({ result, guards }) {
 	}
 }
 
-/** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} analysis */
+/**
+ * @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} analysis
+ */
 export function calculate(analysis) {
-	const performance = calculateScore({ result: analysis, guards: performanceGuards })
-	const maintainability = calculateScore({ result: analysis, guards: maintainabilityGuards })
-	const complexity = calculateScore({ result: analysis, guards: complexityGuards })
+	const performance = calculateScore(analysis, performanceGuards)
+	const maintainability = calculateScore(analysis, maintainabilityGuards)
+	const complexity = calculateScore(analysis, complexityGuards)
 
 	return {
 		/** @deprecated */
