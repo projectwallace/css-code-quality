@@ -3,6 +3,7 @@ import { compareSpecificity } from '@projectwallace/css-analyzer'
 export const guards = [
 
   // Complexity per Selector should not differ too much from the most common Complexity
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const mode = result.selectors.complexity.mode
     const selectorsAboveMode = result.selectors.complexity.items
@@ -25,6 +26,7 @@ export const guards = [
   },
 
   // Specificity per Selector should not differ too much from the most common Specificity
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const mode = result.selectors.specificity.mode
     const selectorsAboveMode = result.selectors.specificity.items
@@ -47,6 +49,7 @@ export const guards = [
   },
 
   // Maximum Selector Complexity should be low
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const MAX_SELECTOR_COMPLEXITY = 5
     const actual = result.selectors.complexity.max
@@ -68,6 +71,7 @@ export const guards = [
   },
 
   // Average Selector Complexity should be low
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const ALLOWED_COMPLEXITY = 2
     const actual = result.selectors.complexity.mean
@@ -88,6 +92,7 @@ export const guards = [
     return outcome
   },
 
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const ALLOWED = 0.01
     const actual = result.selectors.id.ratio
@@ -106,6 +111,7 @@ export const guards = [
     return outcome
   },
 
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const ALLOWED = 0.01
     const actual = result.declarations.importants.ratio

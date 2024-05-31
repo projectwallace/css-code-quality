@@ -41,7 +41,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "uvu",
-    "build": "vite build"
+    "build": "vite build",
+    "check": "tsc --noEmit"
   },
   "dependencies": {
     "@projectwallace/css-analyzer": "^5.14.0"

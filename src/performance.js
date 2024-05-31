@@ -1,6 +1,7 @@
 export const guards = [
 
   // Should not contain @import rules
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => ({
     id: 'Imports',
     score: result.atrules.import.total * 10,
@@ -9,6 +10,7 @@ export const guards = [
   }),
 
   // Should not contain empty rules
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => ({
     id: 'EmptyRules',
     score: result.rules.empty.total,
@@ -16,6 +18,7 @@ export const guards = [
   }),
 
   // Too many selectors appear multiple times
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const outcome = {
       id: 'SelectorDuplications',
@@ -31,6 +34,7 @@ export const guards = [
   },
 
   // Too many declarations appear multiple times
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const outcome = {
       id: 'DeclarationDuplications',
@@ -46,6 +50,7 @@ export const guards = [
   },
 
   // The total amount of CSS should not be too high
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => ({
     id: 'CssSize',
     score: result.stylesheet.size > 200_000 ? 5 : 0,
@@ -54,6 +59,7 @@ export const guards = [
 
   // Should not contain (too much) comments
   // Deduct 1 point for every 250 bytes
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const { comments } = result.stylesheet
     return {
@@ -65,6 +71,7 @@ export const guards = [
 
   // Should not contain too much embedded content
   // Deduct 1 point for every 250 bytes
+  /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const { size } = result.stylesheet.embeddedContent
     return {
