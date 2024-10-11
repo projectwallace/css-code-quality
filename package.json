@@ -2,7 +2,13 @@
   "name": "@projectwallace/css-code-quality",
   "description": "Calculate the Code Quality score of your CSS based on a range of different quality guards",
   "version": "1.0.2",
-  "repository": "git@github.com:projectwallace/css-code-quality.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:projectwallace/css-code-quality.git"
+  },
+  "homepage": "https://github.com/projectwallace/css-code-quality",
+  "issues": "https://github.com/projectwallace/css-code-quality/issues",
+  "license": "MIT",
   "author": {
     "email": "bart@projectwallace.com",
     "name": "Bart Veneman"
