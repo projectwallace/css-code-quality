@@ -73,7 +73,6 @@ Index('smoke test', () => {
 				"id": "TooMuchEmbeddedContent",
 				"score": 0,
 				"value": 0,
-				"actuals": []
 			},
 			{
 				"id": "SourceLinesOfCode",
@@ -235,7 +234,6 @@ Index('smoke test', () => {
 					"id": "TooMuchEmbeddedContent",
 					"score": 0,
 					"value": 0,
-					"actuals": []
 				}
 			]
 		},

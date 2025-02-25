@@ -39,11 +39,11 @@ export const guards = [
     const outcome = {
       id: 'DeclarationDuplications',
       score: 0,
-      value: 1 - result.declarations.unique.ratio,
+      value: 1 - result.declarations.uniquenessRatio,
     }
 
-    if (result.declarations.unique.ratio < 0.66) {
-      outcome.score = Math.floor((1 - result.declarations.unique.ratio) * 10)
+    if (result.declarations.uniquenessRatio < 0.66) {
+      outcome.score = Math.floor((1 - result.declarations.uniquenessRatio) * 10)
     }
 
     return outcome
@@ -72,13 +72,12 @@ export const guards = [
   // Should not contain too much embedded content
   // Deduct 1 point for every 250 bytes
   /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
-  result => {
+  (result) => {
     const { size } = result.stylesheet.embeddedContent
     return {
       id: 'TooMuchEmbeddedContent',
       score: Math.min(20, Math.floor(size.total / 250)),
       value: size.total,
-      actuals: Object.keys(result.stylesheet.embeddedContent.unique),
     }
   },
 ]

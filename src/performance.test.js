@@ -186,7 +186,6 @@ Performance('deducts points for having embedded content', () => {
       id: 'TooMuchEmbeddedContent',
       score: 20,
       value: 45990,
-      actuals: Array.from({ length: 100 }).fill('').map((_, index) => generateEmbed(index)),
     },
   ])
 })
