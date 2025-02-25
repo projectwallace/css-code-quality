@@ -24,7 +24,6 @@ Index('smoke test', () => {
 	`
 	let result = calculate(css)
 	assert.equal(result, {
-		"score": 0,
 		"violations": [
 			{
 				"id": "Imports",
