@@ -36,8 +36,6 @@ export function calculate(analysis) {
 	const complexity = calculateScore(analysis, complexityGuards)
 
 	return {
-		/** @deprecated */
-		score: 0,
 		violations: performance.violations
 			.concat(maintainability.violations)
 			.concat(complexity.violations),
