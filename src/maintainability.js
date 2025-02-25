@@ -65,17 +65,18 @@ export const guards = [
   /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const MAX_SELECTORS_PER_RULESET = 10
+    let max = result.rules.selectors.max || 0
 
     const outcome = {
       id: 'MaxSelectorsPerRule',
       score: 0,
-      value: result.rules.selectors.max,
+      value: max,
       actuals: result.rules.selectors.items,
     }
 
     // Deduct 0.5 points per selectors over 10
-    if (result.rules.selectors.max > MAX_SELECTORS_PER_RULESET) {
-      const score = Math.ceil((result.rules.selectors.max - MAX_SELECTORS_PER_RULESET) * 0.5)
+    if (max > MAX_SELECTORS_PER_RULESET) {
+      const score = Math.ceil((max - MAX_SELECTORS_PER_RULESET) * 0.5)
       outcome.score = Math.min(score, 15)
     }
 
@@ -86,17 +87,18 @@ export const guards = [
   /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const MAX_DECLARATIONS_PER_RULESET = 10
+    const max = result.rules.declarations.max || 0
 
     const outcome = {
       id: 'MaxDeclarationsPerRule',
       score: 0,
-      value: result.rules.declarations.max,
+      value: max,
       actuals: result.rules.declarations.items,
     }
 
     // Deduct 0.5 points per declarations over 10
-    if (result.rules.declarations.max > MAX_DECLARATIONS_PER_RULESET) {
-      const score = Math.ceil((result.rules.declarations.max - MAX_DECLARATIONS_PER_RULESET) * 0.5)
+    if (max > MAX_DECLARATIONS_PER_RULESET) {
+      const score = Math.ceil((max - MAX_DECLARATIONS_PER_RULESET) * 0.5)
       outcome.score = Math.min(15, score)
     }
 

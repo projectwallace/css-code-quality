@@ -51,7 +51,7 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "@projectwallace/css-analyzer": "^5.14.0"
+    "@projectwallace/css-analyzer": "^6.0.0"
   },
   "devDependencies": {
     "typescript": "^5.4.5",

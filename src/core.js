@@ -29,9 +29,7 @@ function calculateScore(result, guards) {
 	}
 }
 
-/**
- * @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} analysis
- */
+/** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} analysis */
 export function calculate(analysis) {
 	const performance = calculateScore(analysis, performanceGuards)
 	const maintainability = calculateScore(analysis, maintainabilityGuards)

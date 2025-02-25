@@ -29,8 +29,10 @@ export const guards = [
   /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const mode = result.selectors.specificity.mode
-    const selectorsAboveMode = result.selectors.specificity.items
-      .filter(c => compareSpecificity(c, mode) < 0)
+    /** @type {import('@projectwallace/css-analyzer').Specificity[]} */
+    // @ts-expect-error css-analyzer type is incorrect
+    const items = result.selectors.specificity.items
+    const selectorsAboveMode = items.filter(c => compareSpecificity(c, mode) < 0)
       .length
 
     const outcome = {
@@ -52,7 +54,7 @@ export const guards = [
   /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
     const MAX_SELECTOR_COMPLEXITY = 5
-    const actual = result.selectors.complexity.max
+    const actual = result.selectors.complexity.max || 0
 
     const outcome = {
       id: 'MaxSelectorComplexity',
