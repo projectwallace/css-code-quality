@@ -54,9 +54,9 @@
     "@projectwallace/css-analyzer": "^6.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.4.5",
+    "typescript": "^5.7.3",
     "uvu": "^0.5.6",
-    "vite": "^5.2.12",
-    "vite-plugin-dts": "^3.9.1"
+    "vite": "^6.2.0",
+    "vite-plugin-dts": "^4.5.0"
   }
 }
