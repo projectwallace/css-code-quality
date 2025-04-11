@@ -1,7 +1,7 @@
 {
   "name": "@projectwallace/css-code-quality",
   "description": "Calculate the Code Quality score of your CSS based on a range of different quality guards",
-  "version": "2.0.0",
+  "version": "3.0.0-alpha.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com:projectwallace/css-code-quality.git"
