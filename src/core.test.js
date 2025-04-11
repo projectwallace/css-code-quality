@@ -1,6 +1,6 @@
 import * as assert from 'uvu/assert'
 import { suite } from 'uvu'
-import { calculate } from './core.js'
+import { calculate } from '../dist/core.js'
 
 const Core = suite('Core')
 
