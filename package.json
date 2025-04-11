@@ -23,14 +23,12 @@
     "maintainability",
     "score"
   ],
-  "files": [
-    "dist",
-    "src",
-    "!src/**/*.test.js"
-  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "type": "module",
-  "source": "src/index.js",
-  "module": "./dist/css-code-quality.js",
+  "main": "./dist/css-code-quality.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -41,7 +39,11 @@
       "import": "./src/core.js"
     }
   },
-  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "!src/**/*.test.js"
+  ],
   "scripts": {
     "test": "uvu",
     "build": "vite build",
