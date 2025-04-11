@@ -34,11 +34,11 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/css-code-quality.js"
+      "import": "./dist/css-code-quality.js"
     },
     "./core": {
       "types": "./dist/core.d.ts",
-      "default": "./src/core.js"
+      "import": "./src/core.js"
     }
   },
   "types": "./dist/index.d.ts",
