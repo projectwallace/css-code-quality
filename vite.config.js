@@ -8,6 +8,7 @@ export default defineConfig({
 			entry: resolve(__dirname, "src/index.js"),
 			name: "cssCodeQuality",
 			fileName: "css-code-quality",
+			formats: ['es']
 		},
 		rollupOptions: {
 			// make sure to externalize deps that shouldn't be bundled

@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://@github.com:projectwallace/css-code-quality.git"
+    "url": "git+https://github.com:projectwallace/css-code-quality.git"
   },
   "homepage": "https://github.com/projectwallace/css-code-quality",
   "issues": "https://github.com/projectwallace/css-code-quality/issues",
@@ -30,18 +30,15 @@
   ],
   "type": "module",
   "source": "src/index.js",
-  "main": "./dist/css-code-quality.umd.cjs",
   "module": "./dist/css-code-quality.js",
-  "unpkg": "./dist/css-code-quality.umd.cjs",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/css-code-quality.js",
-      "require": "./dist/css-code-quality.umd.cjs"
+      "default": "./dist/css-code-quality.js"
     },
     "./core": {
       "types": "./dist/core.d.ts",
-      "import": "./src/core.js"
+      "default": "./src/core.js"
     }
   },
   "types": "./dist/index.d.ts",
