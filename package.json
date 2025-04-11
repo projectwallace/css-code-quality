@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "repository": {
     "type": "git",
-    "url": "git@github.com:projectwallace/css-code-quality.git"
+    "url": "git+https://@github.com:projectwallace/css-code-quality.git"
   },
   "homepage": "https://github.com/projectwallace/css-code-quality",
   "issues": "https://github.com/projectwallace/css-code-quality/issues",
