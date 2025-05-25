@@ -10,8 +10,17 @@ on:
     branches: [main]
 
 jobs:
-  lint:
-    name: Lint
+  lint-js:
+    name: Lint JS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Lint JS
+        run: npx --yes oxlint@latest -D perf
+
+  lint-package:
+    name: Lint package
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,12 +31,22 @@ jobs:
           cache: npm
       - run: npm install --no-fund --no-audit --ignore-scripts
       - run: npm run build
-      - name: Lint JS
-        run: npx --yes oxlint@latest -D perf
-      - name: Check types
-        run: npm run check --if-present
-      - name: Lint package
+      - name: Run publint
         run: npx --yes publint
+
+  check-types:
+    name: Check types
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+      - run: npm install --no-fund --no-audit --ignore-scripts
+      - name: Check types
+        run: npm run check
 
   test:
     name: Unit tests
