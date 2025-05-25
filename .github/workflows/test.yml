@@ -58,5 +58,4 @@ jobs:
         with:
           cache: npm
       - run: npm install --no-fund --no-audit --ignore-scripts
-      - run: npm run build
       - run: npm test
