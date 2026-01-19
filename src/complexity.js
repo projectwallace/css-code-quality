@@ -28,9 +28,10 @@ export const guards = [
   // Specificity per Selector should not differ too much from the most common Specificity
   /** @param {ReturnType<import('@projectwallace/css-analyzer').analyze>} result */
   result => {
+    /** @type {import('@projectwallace/css-analyzer').Specificity} */
+    // @ts-expect-error We _know_ we have 3 items
     const mode = result.selectors.specificity.mode
     /** @type {import('@projectwallace/css-analyzer').Specificity[]} */
-    // @ts-expect-error css-analyzer type is incorrect
     const items = result.selectors.specificity.items
     const selectorsAboveMode = items.filter(c => compareSpecificity(c, mode) < 0)
       .length

@@ -48,12 +48,12 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "@projectwallace/css-analyzer": "^7.1.1"
+    "@projectwallace/css-analyzer": "^8.0.2"
   },
   "devDependencies": {
-    "typescript": "^5.7.3",
+    "typescript": "^5.9.3",
     "uvu": "^0.5.6",
-    "vite": "^6.2.0",
-    "vite-plugin-dts": "^4.5.0"
+    "vite": "^6.4.1",
+    "vite-plugin-dts": "^4.5.4"
   }
 }
