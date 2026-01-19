@@ -161,7 +161,7 @@ Performance('deducts points for having comments', () => {
     {
       id: 'TooMuchComments',
       score: 10,
-      value: 3300,
+      value: 3700,
     },
   ])
 })
