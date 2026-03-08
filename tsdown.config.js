@@ -6,8 +6,5 @@ export default defineConfig({
 	platform: "neutral",
 	dts: true,
 	publint: true,
-	deps: {
-		neverBundle: ["@projectwallace/css-analyzer"],
-	},
 	outExtension: () => ({ js: ".js" }),
 })
