@@ -51,9 +51,9 @@
     "@projectwallace/css-analyzer": "^9.3.0"
   },
   "devDependencies": {
-    "publint": "latest",
-    "tsdown": "latest",
+    "publint": "^0.3.18",
+    "tsdown": "^0.21.0",
     "typescript": "^5.9.3",
-    "vitest": "latest"
+    "vitest": "^4.0.18"
   }
 }
