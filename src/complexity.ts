@@ -46,7 +46,7 @@ export const guards: Guard[] = [
 	// Maximum Selector Complexity should be low
 	(result: Analysis) => {
 		const MAX_SELECTOR_COMPLEXITY = 5
-		const actual = result.selectors.complexity.max || 0
+		const actual = result.selectors.complexity.max
 
 		const outcome = {
 			id: 'MaxSelectorComplexity',

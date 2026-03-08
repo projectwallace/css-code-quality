@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Test
+name: Tests
 
 on:
   push:
@@ -10,31 +10,6 @@ on:
     branches: [main]
 
 jobs:
-  lint-js:
-    name: Lint JS
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-      - name: Use Node.js
-        uses: actions/setup-node@v6
-        uses: actions/setup-node@v6
-      - run: npm install --no-fund --no-audit --ignore-scripts
-      - name: Lint JS
-        run: npm run lint
-
-  check-types:
-    name: Check types
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-      - name: Use Node.js
-        uses: actions/setup-node@v6
-      - run: npm install --no-fund --no-audit --ignore-scripts
-      - name: Check types
-        run: npm run check
-
   test:
     name: Unit tests
     runs-on: ubuntu-latest
@@ -42,6 +17,61 @@ jobs:
       - uses: actions/checkout@v6
       - name: Use Node.js
         uses: actions/setup-node@v6
-      - run: npm install --no-fund --no-audit --ignore-scripts
-      - run: npm run build
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm test
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5.5.2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: projectwallace/css-code-quality
+
+  check:
+    name: Check types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run check
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run build
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run lint
+
+  npm-audit:
+    name: Audit packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - run: npm audit --audit-level=high

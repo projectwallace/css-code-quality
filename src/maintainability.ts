@@ -64,7 +64,7 @@ export const guards: Guard[] = [
 	// Max number of Selectors per Rule should be low
 	(result: Analysis) => {
 		const MAX_SELECTORS_PER_RULESET = 10
-		const max = result.rules.selectors.max || 0
+		const max = result.rules.selectors.max
 
 		const outcome = {
 			id: 'MaxSelectorsPerRule',
