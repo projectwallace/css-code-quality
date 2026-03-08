@@ -43,7 +43,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "uvu",
+    "test": "vitest run",
     "build": "tsdown",
     "check": "tsc --noEmit"
   },
@@ -54,6 +54,6 @@
     "publint": "latest",
     "tsdown": "latest",
     "typescript": "^5.9.3",
-    "uvu": "^0.5.6"
+    "vitest": "latest"
   }
 }

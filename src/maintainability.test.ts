@@ -1,0 +1,188 @@
+import { describe, it, expect } from 'vitest'
+import { calculate } from './index.js'
+
+describe('Maintainability', () => {
+	it('does not deduct points for 1 SLoC', () => {
+		const actual = calculate(`test {}`)
+		expect(actual.maintainability.score).toBe(100)
+		expect(actual.maintainability.violations.length).toBe(0)
+	})
+
+	it('deducts points for having lots of SLoC', () => {
+		const fixture = Array.from({ length: 10_000 })
+			.fill('')
+			.map((_, index) => `selector-${index} { opacity: 0.${index}}`)
+			.join('')
+		const actual = calculate(fixture)
+
+		expect(actual.maintainability.score).toBe(90)
+		expect(actual.maintainability.violations).toEqual([
+			{
+				id: 'SourceLinesOfCode',
+				score: 10,
+				value: 20_000,
+			},
+		])
+	})
+
+	it('deducts no points for have few Selectors per RuleSet', () => {
+		const actual = calculate(`
+			test1 {}
+
+			test2,
+			test3 {}
+		`)
+
+		expect(actual.maintainability.score).toBe(100)
+		expect(actual.maintainability.violations.length).toBe(0)
+	})
+
+	it('deducts points for having too many Selectors per RuleSet', () => {
+		const actual = calculate(`
+			test1,
+			test2,
+			test3,
+			test3b {}
+
+			test4,
+			test5,
+			test6,
+			test7,
+			test8 {}
+		`)
+
+		expect(actual.maintainability.score).toBe(88)
+		expect(actual.maintainability.violations).toEqual([
+			{
+				id: 'AverageSelectorsPerRule',
+				score: 12,
+				value: 4.5,
+				actuals: [4, 5],
+			},
+		])
+	})
+
+	it('deducts points for having too many Selectors in a RuleSet', () => {
+		const actual = calculate(`
+			test1,
+			test2,
+			test3,
+			test4,
+			test5,
+			test6,
+			test7,
+			test8,
+			test9,
+			test10,
+			test11,
+			test12,
+			test13,
+			test14,
+			test15 {}
+
+			testA {}
+		`)
+
+		expect(actual.maintainability.score).toBe(82)
+		expect(actual.maintainability.violations).toEqual([
+			{
+				id: 'AverageSelectorsPerRule',
+				score: 15,
+				value: 8,
+				actuals: [15, 1],
+			},
+			{
+				id: 'MaxSelectorsPerRule',
+				score: 3,
+				value: 15,
+				actuals: [15, 1],
+			},
+		])
+	})
+
+	it('deducts points for having too many Declarations in a single RuleSet', () => {
+		const fixture = `
+			selector1 {
+				color: tomato;
+			}
+
+			selector2 {
+				${Array.from({ length: 23 })
+				.fill('')
+				.map(i => `z-index: ${i};`)
+				.join('')
+			}}
+		`
+		const actual = calculate(fixture)
+
+		expect(actual.maintainability.score).toBe(78)
+		expect(actual.maintainability.violations).toEqual([
+			{
+				id: 'AverageDeclarationsPerRule',
+				score: 15,
+				value: 12,
+				actuals: [1, 23],
+			},
+			{
+				id: 'MaxDeclarationsPerRule',
+				score: 7, // Math.ceil((23 - 10) * 0.5) === Math.ceil(6.5)
+				value: 23,
+				actuals: [1, 23],
+			},
+		])
+	})
+
+	it('deducts points for having RuleSets with more Selectors than what is most common', () => {
+		const fixture = `
+			${Array.from({ length: 1000 })
+				.fill('')
+				.map(index => `selector-${index} {}`)
+				.join('')
+			}
+
+			${Array.from({ length: 500 })
+				.fill('')
+				.map(index => `selector-${index}a, selector-${index}-b {}`)
+				.join('')
+			}
+		`
+		const actual = calculate(fixture)
+
+		expect(actual.maintainability.violations).toEqual([
+			{
+				id: 'MoreThanMostCommonSelectorsPerRule',
+				score: 5,
+				value: 1,
+				actuals: (Array.from({ length: 1000 }).fill(1)).concat(Array.from({ length: 500 }).fill(2)),
+			},
+		])
+		expect(actual.maintainability.score).toBe(95)
+	})
+
+	it('deducts points for having RuleSets with more Declarations than what is most common', () => {
+		const fixture = `
+			${Array.from({ length: 1000 })
+				.fill('')
+				.map(index => `selector-${index}a { z-index: ${index}; }`)
+				.join('')
+			}
+
+			${Array.from({ length: 500 })
+				.fill('')
+				.map(index => `selector-${index}b { z-index: ${index}; content: "${index}" }`)
+				.join('')
+			}
+		`
+		const actual = calculate(fixture)
+
+		expect(actual.maintainability.violations).toEqual([
+			{
+				id: 'MoreThanMostCommonDeclarationsPerRule',
+				score: 5,
+				value: 1,
+				actuals: (Array.from({ length: 1000 }).fill(1)).concat(Array.from({ length: 500 }).fill(2)),
+			},
+		])
+		expect(actual.maintainability.score).toBe(95)
+	})
+})

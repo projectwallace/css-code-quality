@@ -4,8 +4,6 @@
 		"skipLibCheck": true,
 		"target": "es2022",
 		"verbatimModuleSyntax": true,
-		"allowJs": true,
-		"checkJs": true,
 		"moduleDetection": "force",
 
 		// Strictness
@@ -22,8 +20,8 @@
 		"lib": ["ES2022", "DOM", "DOM.Iterable"],
 	},
 	"include": [
-		"src/index.js",
-		"src/core.js"
+		"src/index.ts",
+		"src/core.ts"
 	],
 	"exclude": ["node_modules"]
 }
