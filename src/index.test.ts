@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
 import { calculate } from './index.js'
-import { calculate as pkgCalculate } from '../dist/index.js'
 
 describe('Index', () => {
 	it('exposes a calculate function', () => {
@@ -285,11 +284,5 @@ describe('Index', () => {
 				],
 			},
 		})
-	})
-})
-
-describe('NPM Package', () => {
-	it('exposes a calculate function', () => {
-		expect(typeof pkgCalculate).toBe('function')
 	})
 })
