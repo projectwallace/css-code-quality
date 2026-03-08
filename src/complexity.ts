@@ -2,13 +2,10 @@ import { compareSpecificity, type Specificity } from '@projectwallace/css-analyz
 import type { Analysis, Guard } from './types.js'
 
 export const guards: Guard[] = [
-
 	// Complexity per Selector should not differ too much from the most common Complexity
 	(result: Analysis) => {
 		const mode = result.selectors.complexity.mode
-		const selectorsAboveMode = result.selectors.complexity.items
-			.filter(c => c > mode)
-			.length
+		const selectorsAboveMode = result.selectors.complexity.items.filter((c) => c > mode).length
 
 		const outcome = {
 			id: 'MoreThanMostCommonSelectorComplexity',
@@ -29,8 +26,7 @@ export const guards: Guard[] = [
 	(result: Analysis) => {
 		const mode = result.selectors.specificity.mode as Specificity
 		const items = result.selectors.specificity.items
-		const selectorsAboveMode = items.filter(c => compareSpecificity(c, mode) < 0)
-			.length
+		const selectorsAboveMode = items.filter((c) => compareSpecificity(c, mode) < 0).length
 
 		const outcome = {
 			id: 'MoreThanMostCommonSelectorSpecificity',

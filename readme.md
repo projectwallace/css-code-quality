@@ -37,10 +37,10 @@ npm install @projectwallace/css-code-quality
 ## Usage
 
 ```js
-import { calculate } from "@projectwallace/css-code-quality";
+import { calculate } from '@projectwallace/css-code-quality'
 
-let css = `my_css { /* ... */ }`;
-let result = calculate(css);
+let css = `my_css { /* ... */ }`
+let result = calculate(css)
 
 /*
 The result shape looks something like this:

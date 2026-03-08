@@ -1,7 +1,6 @@
 import type { Analysis, Guard } from './types.js'
 
 export const guards: Guard[] = [
-
 	// Source Lines of Code should be low
 	(result: Analysis) => {
 		const outcome = {
@@ -53,7 +52,9 @@ export const guards: Guard[] = [
 
 		// Deduct 5 points per declaration over 5
 		if (result.rules.declarations.mean > ALLOWED_DECLARATIONS_PER_RULESET) {
-			const score = Math.floor((result.rules.declarations.mean - ALLOWED_DECLARATIONS_PER_RULESET) * 5)
+			const score = Math.floor(
+				(result.rules.declarations.mean - ALLOWED_DECLARATIONS_PER_RULESET) * 5,
+			)
 			outcome.score = Math.min(15, score)
 		}
 
@@ -106,9 +107,9 @@ export const guards: Guard[] = [
 	// Selectors per RuleSet
 	(result: Analysis) => {
 		const mode = result.rules.selectors.mode
-		const rulesHavingMoreThanMode = result.rules.selectors.items
-			.filter(item => item > mode)
-			.length
+		const rulesHavingMoreThanMode = result.rules.selectors.items.filter(
+			(item) => item > mode,
+		).length
 
 		const outcome = {
 			id: 'MoreThanMostCommonSelectorsPerRule',
@@ -132,7 +133,9 @@ export const guards: Guard[] = [
 	// Declarations per RuleSet
 	(result: Analysis) => {
 		const mode = result.rules.selectors.mode
-		const rulesHavingMoreThanMode = result.rules.declarations.items.filter(item => item > mode).length
+		const rulesHavingMoreThanMode = result.rules.declarations.items.filter(
+			(item) => item > mode,
+		).length
 
 		const outcome = {
 			id: 'MoreThanMostCommonDeclarationsPerRule',

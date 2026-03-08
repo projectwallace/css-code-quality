@@ -170,11 +170,13 @@ describe('Performance', () => {
 		}
 		const fixture = Array.from({ length: 100 })
 			.fill('')
-			.map((_, index) => `
+			.map(
+				(_, index) => `
 				selector-${index} {
 					background: url(${generateEmbed(index)});
 				}
-			`)
+			`,
+			)
 			.join('')
 		const actual = calculate(fixture)
 

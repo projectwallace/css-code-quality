@@ -35,9 +35,7 @@ export function calculate(analysis: Analysis) {
 		violations: performance.violations
 			.concat(maintainability.violations)
 			.concat(complexity.violations),
-		passes: performance.passes
-			.concat(maintainability.passes)
-			.concat(complexity.passes),
+		passes: performance.passes.concat(maintainability.passes).concat(complexity.passes),
 		performance,
 		maintainability,
 		complexity,

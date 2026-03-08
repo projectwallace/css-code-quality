@@ -1,59 +1,62 @@
 {
-  "name": "@projectwallace/css-code-quality",
-  "description": "Calculate the Code Quality score of your CSS based on a range of different quality guards",
-  "version": "3.1.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com:projectwallace/css-code-quality.git"
-  },
-  "homepage": "https://github.com/projectwallace/css-code-quality",
-  "issues": "https://github.com/projectwallace/css-code-quality/issues",
-  "license": "MIT",
-  "author": {
-    "email": "bart@projectwallace.com",
-    "name": "Bart Veneman"
-  },
-  "keywords": [
-    "css",
-    "codequality",
-    "codesniffer",
-    "quality",
-    "complexity",
-    "performance",
-    "maintainability",
-    "score"
-  ],
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./core": {
-      "types": "./dist/core.d.ts",
-      "import": "./dist/core.js"
-    }
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "test": "vitest run",
-    "build": "tsdown",
-    "check": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@projectwallace/css-analyzer": "^9.3.0"
-  },
-  "devDependencies": {
-    "publint": "^0.3.18",
-    "tsdown": "^0.21.0",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
-  }
+	"name": "@projectwallace/css-code-quality",
+	"version": "3.1.0",
+	"description": "Calculate the Code Quality score of your CSS based on a range of different quality guards",
+	"keywords": [
+		"codequality",
+		"codesniffer",
+		"complexity",
+		"css",
+		"maintainability",
+		"performance",
+		"quality",
+		"score"
+	],
+	"homepage": "https://github.com/projectwallace/css-code-quality",
+	"license": "MIT",
+	"author": {
+		"name": "Bart Veneman",
+		"email": "bart@projectwallace.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com:projectwallace/css-code-quality.git"
+	},
+	"files": [
+		"dist"
+	],
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./core": {
+			"types": "./dist/core.d.ts",
+			"import": "./dist/core.js"
+		}
+	},
+	"scripts": {
+		"test": "vitest",
+		"build": "tsdown",
+		"check": "tsc --noEmit",
+		"lint": "oxlint && oxfmt --check"
+	},
+	"dependencies": {
+		"@projectwallace/css-analyzer": "^9.3.0"
+	},
+	"devDependencies": {
+		"oxfmt": "^0.36.0",
+		"oxlint": "^1.51.0",
+		"publint": "^0.3.18",
+		"tsdown": "^0.21.0",
+		"typescript": "^5.9.3",
+		"vitest": "^4.0.18"
+	},
+	"engines": {
+		"node": ">=16.0.0"
+	},
+	"issues": "https://github.com/projectwallace/css-code-quality/issues"
 }

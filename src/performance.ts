@@ -1,7 +1,6 @@
 import type { Analysis, Guard } from './types.js'
 
 export const guards: Guard[] = [
-
 	// Should not contain @import rules
 	(result: Analysis) => ({
 		id: 'Imports',

@@ -6,15 +6,13 @@ describe('Complexity', () => {
 		const fixture = `
 			${Array.from({ length: 1000 })
 				.fill('')
-				.map(_ => `selector { }`)
-				.join('')
-			}
+				.map((_) => `selector { }`)
+				.join('')}
 
 			${Array.from({ length: 500 })
 				.fill('')
-				.map(_ => `:where(selector) { }`)
-				.join('')
-			}
+				.map((_) => `:where(selector) { }`)
+				.join('')}
 		`
 		const actual = calculate(fixture)
 
@@ -23,7 +21,9 @@ describe('Complexity', () => {
 				id: 'MoreThanMostCommonSelectorComplexity',
 				score: 5,
 				value: 1 / 3,
-				actuals: (Array.from({ length: 1000 }).fill(1)).concat(Array.from({ length: 500 }).fill(2)),
+				actuals: Array.from({ length: 1000 })
+					.fill(1)
+					.concat(Array.from({ length: 500 }).fill(2)),
 			},
 		])
 		expect(actual.complexity.score).toBe(95)
@@ -33,15 +33,13 @@ describe('Complexity', () => {
 		const fixture = `
 			${Array.from({ length: 500 })
 				.fill('')
-				.map(_ => `selector1 { }`)
-				.join('')
-			}
+				.map((_) => `selector1 { }`)
+				.join('')}
 
 			${Array.from({ length: 200 })
 				.fill('')
-				.map(_ => `.selector { }`)
-				.join('')
-			}
+				.map((_) => `.selector { }`)
+				.join('')}
 		`
 		const actual = calculate(fixture)
 
@@ -50,7 +48,9 @@ describe('Complexity', () => {
 				id: 'MoreThanMostCommonSelectorSpecificity',
 				score: 2,
 				value: 200 / 700,
-				actuals: (Array.from({ length: 500 }).fill([0, 0, 1])).concat(Array.from({ length: 200 }).fill([0, 1, 0])),
+				actuals: Array.from({ length: 500 })
+					.fill([0, 0, 1])
+					.concat(Array.from({ length: 200 }).fill([0, 1, 0])),
 			},
 		])
 		expect(actual.complexity.score).toBe(98)

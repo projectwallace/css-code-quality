@@ -108,10 +108,9 @@ describe('Maintainability', () => {
 
 			selector2 {
 				${Array.from({ length: 23 })
-				.fill('')
-				.map(i => `z-index: ${i};`)
-				.join('')
-			}}
+					.fill('')
+					.map((i) => `z-index: ${i};`)
+					.join('')}}
 		`
 		const actual = calculate(fixture)
 
@@ -136,15 +135,13 @@ describe('Maintainability', () => {
 		const fixture = `
 			${Array.from({ length: 1000 })
 				.fill('')
-				.map(index => `selector-${index} {}`)
-				.join('')
-			}
+				.map((index) => `selector-${index} {}`)
+				.join('')}
 
 			${Array.from({ length: 500 })
 				.fill('')
-				.map(index => `selector-${index}a, selector-${index}-b {}`)
-				.join('')
-			}
+				.map((index) => `selector-${index}a, selector-${index}-b {}`)
+				.join('')}
 		`
 		const actual = calculate(fixture)
 
@@ -153,7 +150,9 @@ describe('Maintainability', () => {
 				id: 'MoreThanMostCommonSelectorsPerRule',
 				score: 5,
 				value: 1,
-				actuals: (Array.from({ length: 1000 }).fill(1)).concat(Array.from({ length: 500 }).fill(2)),
+				actuals: Array.from({ length: 1000 })
+					.fill(1)
+					.concat(Array.from({ length: 500 }).fill(2)),
 			},
 		])
 		expect(actual.maintainability.score).toBe(95)
@@ -163,15 +162,13 @@ describe('Maintainability', () => {
 		const fixture = `
 			${Array.from({ length: 1000 })
 				.fill('')
-				.map(index => `selector-${index}a { z-index: ${index}; }`)
-				.join('')
-			}
+				.map((index) => `selector-${index}a { z-index: ${index}; }`)
+				.join('')}
 
 			${Array.from({ length: 500 })
 				.fill('')
-				.map(index => `selector-${index}b { z-index: ${index}; content: "${index}" }`)
-				.join('')
-			}
+				.map((index) => `selector-${index}b { z-index: ${index}; content: "${index}" }`)
+				.join('')}
 		`
 		const actual = calculate(fixture)
 
@@ -180,7 +177,9 @@ describe('Maintainability', () => {
 				id: 'MoreThanMostCommonDeclarationsPerRule',
 				score: 5,
 				value: 1,
-				actuals: (Array.from({ length: 1000 }).fill(1)).concat(Array.from({ length: 500 }).fill(2)),
+				actuals: Array.from({ length: 1000 })
+					.fill(1)
+					.concat(Array.from({ length: 500 }).fill(2)),
 			},
 		])
 		expect(actual.maintainability.score).toBe(95)
