@@ -1,4 +1,5 @@
-import { compareSpecificity, type Specificity } from '@projectwallace/css-analyzer'
+import { type Specificity } from '@projectwallace/css-analyzer'
+import { compareSpecificity } from '@projectwallace/css-analyzer/selectors'
 import type { Analysis, Guard } from './types.js'
 
 export const guards: Guard[] = [
@@ -26,7 +27,7 @@ export const guards: Guard[] = [
 	(result: Analysis) => {
 		const mode = result.selectors.specificity.mode as Specificity
 		const items = result.selectors.specificity.items
-		const selectorsAboveMode = items.filter((c) => compareSpecificity(c, mode) < 0).length
+		const selectorsAboveMode = items.filter((c) => compareSpecificity(c, mode) > 0).length
 
 		const outcome = {
 			id: 'MoreThanMostCommonSelectorSpecificity',

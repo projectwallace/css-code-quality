@@ -42,19 +42,19 @@
 		"test": "vitest run --coverage",
 		"build": "tsdown",
 		"check": "tsc --noEmit",
-		"lint": "oxlint && oxfmt --check"
+		"lint": "oxlint; oxfmt --check"
 	},
 	"dependencies": {
-		"@projectwallace/css-analyzer": "^9.3.0"
+		"@projectwallace/css-analyzer": "^9.6.2"
 	},
 	"devDependencies": {
-		"@vitest/coverage-v8": "^4.0.18",
+		"@vitest/coverage-v8": "^4.1.2",
 		"oxfmt": "^0.43.0",
-		"oxlint": "^1.51.0",
+		"oxlint": "^1.58.0",
 		"publint": "^0.3.18",
-		"tsdown": "^0.21.0",
+		"tsdown": "^0.21.7",
 		"typescript": "^6.0.2",
-		"vitest": "^4.0.18"
+		"vitest": "^4.1.2"
 	},
 	"engines": {
 		"node": ">=16.0.0"
