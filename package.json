@@ -38,6 +38,10 @@
 			"import": "./dist/core.js"
 		}
 	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
 	"scripts": {
 		"test": "vitest run --coverage",
 		"build": "tsdown",
@@ -57,7 +61,14 @@
 		"vitest": "^4.1.2"
 	},
 	"engines": {
-		"node": ">=16.0.0"
+		"node": ">=16.0.0",
+		"pnpm": ">=11.0.0"
+	},
+	"packageManager": "pnpm@11.1.1",
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	},
 	"issues": "https://github.com/projectwallace/css-code-quality/issues"
 }
