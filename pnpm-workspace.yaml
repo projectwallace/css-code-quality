@@ -1,0 +1,6 @@
+settings:
+  blockExoticSubdeps: true
+  minimumReleaseAge: 10080
+  minimumReleaseAgeExclude:
+    - '@projectwallace/*'
+  trustPolicy: no-downgrade
