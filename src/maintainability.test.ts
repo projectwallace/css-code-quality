@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 import { calculate } from './index.js'
 
 describe('Maintainability', () => {
