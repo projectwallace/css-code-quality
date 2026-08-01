@@ -1,12 +1,12 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 import { calculate } from './index.js'
 
 describe('Index', () => {
-	it('exposes a calculate function', () => {
+	test('exposes a calculate function', () => {
 		expect(typeof calculate).toBe('function')
 	})
 
-	it('smoke test', () => {
+	test('smoke test', () => {
 		const css = `
 			@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 

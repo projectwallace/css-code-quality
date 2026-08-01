@@ -3,17 +3,21 @@
 
 version: 2
 updates:
-  - package-ecosystem: 'npm' # pnpm is detected automatically via pnpm-lock.yaml
+  - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'monthly'
     groups:
-      npm-all:
-        exclude-patterns:
-          - '@projectwallace/*'
       projectwallace:
         patterns:
           - '@projectwallace/*'
+      npm-all:
+        patterns:
+          - '*'
+        exclude-patterns:
+          - '@projectwallace/*'
+    cooldown:
+      default-days: 7
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
@@ -22,3 +26,5 @@ updates:
       github-actions:
         patterns:
           - '*'
+    cooldown:
+      default-days: 7

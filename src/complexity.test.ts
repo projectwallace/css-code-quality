@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 import { calculate } from './index.js'
 
 describe('Complexity', () => {
-	it('should deduct points for a lot of Selectors more complex than most common Complexity', () => {
+	test('should deduct points for a lot of Selectors more complex than most common Complexity', () => {
 		const fixture = `
 			${Array.from({ length: 1000 })
 				.fill('')
@@ -29,7 +29,7 @@ describe('Complexity', () => {
 		expect(actual.complexity.score).toBe(95)
 	})
 
-	it('should deduct points for a lot of Selectors more complex than most common Specificity', () => {
+	test('should deduct points for a lot of Selectors more complex than most common Specificity', () => {
 		const fixture = `
 			${Array.from({ length: 500 })
 				.fill('')
@@ -56,7 +56,7 @@ describe('Complexity', () => {
 		expect(actual.complexity.score).toBe(98)
 	})
 
-	it('deducts points for selectors with high complexity', () => {
+	test('deducts points for selectors with high complexity', () => {
 		const fixture = `
 			a b c d e f {}
 		`
@@ -79,7 +79,7 @@ describe('Complexity', () => {
 		expect(actual.complexity.score).toBe(87)
 	})
 
-	it('deducts points for having a high ratio of ID selectors', () => {
+	test('deducts points for having a high ratio of ID selectors', () => {
 		const fixture = `
 			a {}
 			b {}
@@ -99,7 +99,7 @@ describe('Complexity', () => {
 		expect(actual.complexity.score).toBe(98)
 	})
 
-	it('deducts points for having a high ratio !importants', () => {
+	test('deducts points for having a high ratio !importants', () => {
 		const fixture = `
 			selector {
 				a: b;
