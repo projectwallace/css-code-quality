@@ -50,12 +50,12 @@
 		"knip": "knip"
 	},
 	"dependencies": {
-		"@projectwallace/css-analyzer": "^9.9.3",
-		"knip": "^6.31.0"
+		"@projectwallace/css-analyzer": "^9.9.3"
 	},
 	"devDependencies": {
 		"@projectwallace/preset-oxlint": "^0.0.11",
 		"@vitest/coverage-v8": "^4.1.2",
+		"knip": "^6.31.0",
 		"oxfmt": "^0.61.0",
 		"oxlint": "^1.58.0",
 		"publint": "^0.3.18",
