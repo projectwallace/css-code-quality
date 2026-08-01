@@ -2,13 +2,13 @@ import { describe, it, expect } from 'vitest'
 import { calculate } from './index.js'
 
 describe('Maintainability', () => {
-	it('does not deduct points for 1 SLoC', () => {
+	test('does not deduct points for 1 SLoC', () => {
 		const actual = calculate(`test {}`)
 		expect(actual.maintainability.score).toBe(100)
 		expect(actual.maintainability.violations.length).toBe(0)
 	})
 
-	it('deducts points for having lots of SLoC', () => {
+	test('deducts points for having lots of SLoC', () => {
 		const fixture = Array.from({ length: 10_000 })
 			.fill('')
 			.map((_, index) => `selector-${index} { opacity: 0.${index}}`)
@@ -25,7 +25,7 @@ describe('Maintainability', () => {
 		])
 	})
 
-	it('deducts no points for have few Selectors per RuleSet', () => {
+	test('deducts no points for have few Selectors per RuleSet', () => {
 		const actual = calculate(`
 			test1 {}
 
@@ -37,7 +37,7 @@ describe('Maintainability', () => {
 		expect(actual.maintainability.violations.length).toBe(0)
 	})
 
-	it('deducts points for having too many Selectors per RuleSet', () => {
+	test('deducts points for having too many Selectors per RuleSet', () => {
 		const actual = calculate(`
 			test1,
 			test2,
@@ -62,7 +62,7 @@ describe('Maintainability', () => {
 		])
 	})
 
-	it('deducts points for having too many Selectors in a RuleSet', () => {
+	test('deducts points for having too many Selectors in a RuleSet', () => {
 		const actual = calculate(`
 			test1,
 			test2,
@@ -100,7 +100,7 @@ describe('Maintainability', () => {
 		])
 	})
 
-	it('deducts points for having too many Declarations in a single RuleSet', () => {
+	test('deducts points for having too many Declarations in a single RuleSet', () => {
 		const fixture = `
 			selector1 {
 				color: tomato;
@@ -131,7 +131,7 @@ describe('Maintainability', () => {
 		])
 	})
 
-	it('deducts points for having RuleSets with more Selectors than what is most common', () => {
+	test('deducts points for having RuleSets with more Selectors than what is most common', () => {
 		const fixture = `
 			${Array.from({ length: 1000 })
 				.fill('')
@@ -158,7 +158,7 @@ describe('Maintainability', () => {
 		expect(actual.maintainability.score).toBe(95)
 	})
 
-	it('deducts points for having RuleSets with more Declarations than what is most common', () => {
+	test('deducts points for having RuleSets with more Declarations than what is most common', () => {
 		const fixture = `
 			${Array.from({ length: 1000 })
 				.fill('')

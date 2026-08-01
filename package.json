@@ -46,12 +46,15 @@
 		"test": "vitest run --coverage",
 		"build": "tsdown",
 		"check": "tsc --noEmit",
-		"lint": "oxlint; oxfmt --check"
+		"lint": "oxlint; oxfmt --check",
+		"knip": "knip"
 	},
 	"dependencies": {
-		"@projectwallace/css-analyzer": "^9.8.2"
+		"@projectwallace/css-analyzer": "^9.9.3",
+		"knip": "^6.31.0"
 	},
 	"devDependencies": {
+		"@projectwallace/preset-oxlint": "^0.0.11",
 		"@vitest/coverage-v8": "^4.1.2",
 		"oxfmt": "^0.61.0",
 		"oxlint": "^1.58.0",
@@ -65,10 +68,5 @@
 		"pnpm": ">=11.0.0"
 	},
 	"packageManager": "pnpm@11.1.1",
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
-	},
 	"issues": "https://github.com/projectwallace/css-code-quality/issues"
 }
