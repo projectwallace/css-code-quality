@@ -50,23 +50,23 @@
 		"knip": "knip"
 	},
 	"dependencies": {
-		"@projectwallace/css-analyzer": "^9.9.3"
+		"@projectwallace/css-analyzer": "^9.9.5"
 	},
 	"devDependencies": {
 		"@projectwallace/preset-oxlint": "^0.0.11",
-		"@vitest/coverage-v8": "^5.0.1",
-		"knip": "^6.31.0",
-		"oxfmt": "^0.70.0",
-		"oxlint": "^1.58.0",
-		"publint": "^0.3.18",
-		"tsdown": "^0.23.0",
+		"@vitest/coverage-v8": "^5.0.5",
+		"knip": "^6.42.1",
+		"oxfmt": "^0.74.0",
+		"oxlint": "^1.89.0",
+		"publint": "^0.3.25",
+		"tsdown": "^0.23.1",
 		"typescript": "^7.0.2",
-		"vitest": "^5.0.1"
+		"vitest": "^5.0.5"
 	},
 	"engines": {
 		"node": ">=16.0.0",
-		"pnpm": ">=11.0.0"
+		"pnpm": ">=11.16.0"
 	},
-	"packageManager": "pnpm@11.1.1",
+	"packageManager": "pnpm@11.16.0",
 	"issues": "https://github.com/projectwallace/css-code-quality/issues"
 }
