@@ -3,7 +3,21 @@ import { guards as maintainabilityGuards } from './maintainability.js'
 import { guards as complexityGuards } from './complexity.js'
 import type { Analysis, Guard, GuardResult } from './types.js'
 
-function calculateScore(result: Analysis, guards: Guard[]) {
+type ScoreResult = {
+	score: number
+	violations: GuardResult[]
+	passes: GuardResult[]
+}
+
+type CalculateResult = {
+	violations: GuardResult[]
+	passes: GuardResult[]
+	performance: ScoreResult
+	maintainability: ScoreResult
+	complexity: ScoreResult
+}
+
+function calculateScore(result: Analysis, guards: Guard[]): ScoreResult {
 	let score = 100
 	const violations: GuardResult[] = []
 	const passes: GuardResult[] = []
@@ -26,7 +40,7 @@ function calculateScore(result: Analysis, guards: Guard[]) {
 	}
 }
 
-export function calculate(analysis: Analysis) {
+export function calculate(analysis: Analysis): CalculateResult {
 	const performance = calculateScore(analysis, performanceGuards)
 	const maintainability = calculateScore(analysis, maintainabilityGuards)
 	const complexity = calculateScore(analysis, complexityGuards)
