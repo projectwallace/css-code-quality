@@ -1,18 +1,22 @@
-import { type Specificity } from '@projectwallace/css-analyzer'
-import { compareSpecificity } from '@projectwallace/css-analyzer/selectors'
-import type { Analysis, Guard } from './types.js'
+import { summarize_numbers } from '@projectwallace/css-analyzer'
+import { summarize_specificity } from '@projectwallace/css-analyzer/collectors'
+import { compare_specificity, type Specificity } from '@projectwallace/css-analyzer/selectors'
+import { items, type Analysis, type Guard } from './types.js'
+
+const parse_specificity = (s: string) => s.split(',').map(Number) as Specificity
 
 export const guards: Guard[] = [
 	// Complexity per Selector should not differ too much from the most common Complexity
 	(result: Analysis) => {
-		const mode = result.selectors.complexity.mode
-		const selectorsAboveMode = result.selectors.complexity.items.filter((c) => c > mode).length
+		const complexities = items(result.selectors.complexity)
+		const mode = summarize_numbers(result.selectors.complexity).mode
+		const selectorsAboveMode = complexities.filter((c) => c > mode).length
 
 		const outcome = {
 			id: 'MoreThanMostCommonSelectorComplexity',
 			score: 0,
 			value: result.selectors.total === 0 ? 0 : selectorsAboveMode / result.selectors.total,
-			actuals: result.selectors.complexity.items,
+			actuals: complexities,
 		}
 
 		if (selectorsAboveMode > result.selectors.total * 0.1) {
@@ -25,15 +29,15 @@ export const guards: Guard[] = [
 
 	// Specificity per Selector should not differ too much from the most common Specificity
 	(result: Analysis) => {
-		const mode = result.selectors.specificity.mode as Specificity
-		const items = result.selectors.specificity.items
-		const selectorsAboveMode = items.filter((c) => compareSpecificity(c, mode) > 0).length
+		const mode = summarize_specificity(result.specificity).mode
+		const all = items(result.specificity).map((s) => parse_specificity(s))
+		const selectorsAboveMode = all.filter((c) => compare_specificity(c, mode) > 0).length
 
 		const outcome = {
 			id: 'MoreThanMostCommonSelectorSpecificity',
 			score: 0,
 			value: result.selectors.total === 0 ? 0 : selectorsAboveMode / result.selectors.total,
-			actuals: result.selectors.specificity.items,
+			actuals: all,
 		}
 
 		if (selectorsAboveMode > result.selectors.total * 0.1) {
@@ -47,13 +51,13 @@ export const guards: Guard[] = [
 	// Maximum Selector Complexity should be low
 	(result: Analysis) => {
 		const MAX_SELECTOR_COMPLEXITY = 5
-		const actual = result.selectors.complexity.max
+		const { max: actual } = summarize_numbers(result.selectors.complexity)
 
 		const outcome = {
 			id: 'MaxSelectorComplexity',
 			score: 0,
-			value: result.selectors.complexity.max,
-			actuals: result.selectors.complexity.items,
+			value: actual,
+			actuals: items(result.selectors.complexity),
 		}
 
 		// Deduct 0.5 points per complexity over 5, up to 5 points
@@ -68,13 +72,13 @@ export const guards: Guard[] = [
 	// Average Selector Complexity should be low
 	(result: Analysis) => {
 		const ALLOWED_COMPLEXITY = 2
-		const actual = result.selectors.complexity.mean
+		const actual = summarize_numbers(result.selectors.complexity).mean
 
 		const outcome = {
 			id: 'AverageSelectorComplexity',
 			score: 0,
 			value: actual,
-			actuals: result.selectors.complexity.items,
+			actuals: items(result.selectors.complexity),
 		}
 
 		// Deduct 2 points per selector over 2
@@ -88,12 +92,13 @@ export const guards: Guard[] = [
 
 	(result: Analysis) => {
 		const ALLOWED = 0.01
-		const actual = result.selectors.id.ratio
+		const actual =
+			result.selectors.total === 0 ? 0 : result.selectors.ids.total / result.selectors.total
 		const outcome = {
 			id: 'IdSelectorRatio',
 			score: 0,
 			value: actual,
-			actuals: Object.keys(result.selectors.id.unique),
+			actuals: [...result.selectors.ids.unique.keys()],
 		}
 
 		if (actual > ALLOWED) {
@@ -106,7 +111,10 @@ export const guards: Guard[] = [
 
 	(result: Analysis) => {
 		const ALLOWED = 0.01
-		const actual = result.declarations.importants.ratio
+		const actual =
+			result.declarations.total === 0
+				? 0
+				: result.declarations.importants.total / result.declarations.total
 		const outcome = {
 			id: 'ImportantRatio',
 			score: 0,

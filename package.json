@@ -50,7 +50,7 @@
 		"knip": "knip"
 	},
 	"dependencies": {
-		"@projectwallace/css-analyzer": "^9.9.5"
+		"@projectwallace/css-analyzer": "^10.0.0"
 	},
 	"devDependencies": {
 		"@projectwallace/preset-oxlint": "^0.0.11",
@@ -64,7 +64,7 @@
 		"vitest": "^5.0.5"
 	},
 	"engines": {
-		"node": ">=16.0.0",
+		"node": ">=22.18",
 		"pnpm": ">=11.16.0"
 	},
 	"packageManager": "pnpm@11.16.0",
