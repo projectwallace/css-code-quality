@@ -1,4 +1,5 @@
-import type { Analysis, Guard } from './types.js'
+import { summarize_numbers } from '@projectwallace/css-analyzer'
+import { items, type Analysis, type Guard } from './types.js'
 
 export const guards: Guard[] = [
 	// Source Lines of Code should be low
@@ -6,12 +7,12 @@ export const guards: Guard[] = [
 		const outcome = {
 			id: 'SourceLinesOfCode',
 			score: 0,
-			value: result.stylesheet.sourceLinesOfCode,
+			value: result.stylesheet.source_lines_of_code,
 		}
 
-		if (result.stylesheet.sourceLinesOfCode > 10000) {
+		if (result.stylesheet.source_lines_of_code > 10000) {
 			// deduct 1 point per 1000 lines of code over 10,000
-			const score = Math.floor((result.stylesheet.sourceLinesOfCode - 10000) / 1000)
+			const score = Math.floor((result.stylesheet.source_lines_of_code - 10000) / 1000)
 			outcome.score = Math.min(15, score)
 		}
 
@@ -21,13 +22,13 @@ export const guards: Guard[] = [
 	// Average count of Selectors per RuleSet should be low
 	(result: Analysis) => {
 		const ALLOWED_SELECTORS_PER_RULESET = 2
-		const actual = result.rules.selectors.mean
+		const actual = summarize_numbers(result.rules.selectors).mean
 
 		const outcome = {
 			id: 'AverageSelectorsPerRule',
 			score: 0,
 			value: actual,
-			actuals: result.rules.selectors.items,
+			actuals: items(result.rules.selectors),
 		}
 
 		// Deduct 5 points per selector over 2
@@ -43,18 +44,17 @@ export const guards: Guard[] = [
 	(result: Analysis) => {
 		const ALLOWED_DECLARATIONS_PER_RULESET = 5
 
+		const mean = summarize_numbers(result.rules.declarations).mean
 		const outcome = {
 			id: 'AverageDeclarationsPerRule',
 			score: 0,
-			value: result.rules.declarations.mean,
-			actuals: result.rules.declarations.items,
+			value: mean,
+			actuals: items(result.rules.declarations),
 		}
 
 		// Deduct 5 points per declaration over 5
-		if (result.rules.declarations.mean > ALLOWED_DECLARATIONS_PER_RULESET) {
-			const score = Math.floor(
-				(result.rules.declarations.mean - ALLOWED_DECLARATIONS_PER_RULESET) * 5,
-			)
+		if (mean > ALLOWED_DECLARATIONS_PER_RULESET) {
+			const score = Math.floor((mean - ALLOWED_DECLARATIONS_PER_RULESET) * 5)
 			outcome.score = Math.min(15, score)
 		}
 
@@ -64,13 +64,13 @@ export const guards: Guard[] = [
 	// Max number of Selectors per Rule should be low
 	(result: Analysis) => {
 		const MAX_SELECTORS_PER_RULESET = 10
-		const max = result.rules.selectors.max
+		const max = summarize_numbers(result.rules.selectors).max
 
 		const outcome = {
 			id: 'MaxSelectorsPerRule',
 			score: 0,
 			value: max,
-			actuals: result.rules.selectors.items,
+			actuals: items(result.rules.selectors),
 		}
 
 		// Deduct 0.5 points per selectors over 10
@@ -85,13 +85,13 @@ export const guards: Guard[] = [
 	// Max number of Declarations per Rule should be low
 	(result: Analysis) => {
 		const MAX_DECLARATIONS_PER_RULESET = 10
-		const max = result.rules.declarations.max || 0
+		const max = summarize_numbers(result.rules.declarations).max || 0
 
 		const outcome = {
 			id: 'MaxDeclarationsPerRule',
 			score: 0,
 			value: max,
-			actuals: result.rules.declarations.items,
+			actuals: items(result.rules.declarations),
 		}
 
 		// Deduct 0.5 points per declarations over 10
@@ -106,16 +106,16 @@ export const guards: Guard[] = [
 	// Number of Selectors per RuleSet should not differ too much from the most common amount of
 	// Selectors per RuleSet
 	(result: Analysis) => {
-		const mode = result.rules.selectors.mode
-		const rulesHavingMoreThanMode = result.rules.selectors.items.filter(
+		const mode = summarize_numbers(result.rules.selectors).mode
+		const rulesHavingMoreThanMode = items(result.rules.selectors).filter(
 			(item) => item > mode,
 		).length
 
 		const outcome = {
 			id: 'MoreThanMostCommonSelectorsPerRule',
 			score: 0,
-			value: result.rules.selectors.mode,
-			actuals: result.rules.selectors.items,
+			value: mode,
+			actuals: items(result.rules.selectors),
 		}
 
 		// if more than 10% of RuleSets has more Selectors than most common:
@@ -132,16 +132,16 @@ export const guards: Guard[] = [
 	// Number of Declarations per RuleSet should not differ too much from the most common amount of
 	// Declarations per RuleSet
 	(result: Analysis) => {
-		const mode = result.rules.selectors.mode
-		const rulesHavingMoreThanMode = result.rules.declarations.items.filter(
+		const mode = summarize_numbers(result.rules.selectors).mode
+		const rulesHavingMoreThanMode = items(result.rules.declarations).filter(
 			(item) => item > mode,
 		).length
 
 		const outcome = {
 			id: 'MoreThanMostCommonDeclarationsPerRule',
 			score: 0,
-			value: result.rules.declarations.mode,
-			actuals: result.rules.declarations.items,
+			value: summarize_numbers(result.rules.declarations).mode,
+			actuals: items(result.rules.declarations),
 		}
 
 		// if more than 10% of RuleSets has more Declarations than most common:

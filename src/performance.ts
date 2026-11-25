@@ -1,19 +1,22 @@
+import { summarize } from '@projectwallace/css-analyzer'
 import type { Analysis, Guard } from './types.js'
+
+const uniqueness = (counts: Parameters<typeof summarize>[0]) => summarize(counts).uniqueness_ratio
 
 export const guards: Guard[] = [
 	// Should not contain @import rules
 	(result: Analysis) => ({
 		id: 'Imports',
-		score: result.atrules.import.total * 10,
-		value: result.atrules.import.total,
-		actuals: Object.keys(result.atrules.import.unique),
+		score: result.atrules.imports.total * 10,
+		value: result.atrules.imports.total,
+		actuals: [...result.atrules.imports.unique.keys()],
 	}),
 
 	// Should not contain empty rules
 	(result: Analysis) => ({
 		id: 'EmptyRules',
-		score: result.rules.empty.total,
-		value: result.rules.empty.total,
+		score: result.rules.empty,
+		value: result.rules.empty,
 	}),
 
 	// Too many selectors appear multiple times
@@ -21,11 +24,11 @@ export const guards: Guard[] = [
 		const outcome = {
 			id: 'SelectorDuplications',
 			score: 0,
-			value: 1 - result.selectors.uniquenessRatio,
+			value: 1 - uniqueness(result.selectors),
 		}
 
-		if (result.selectors.uniquenessRatio < 0.66) {
-			outcome.score = Math.floor((1 - result.selectors.uniquenessRatio) * 10)
+		if (uniqueness(result.selectors) < 0.66) {
+			outcome.score = Math.floor((1 - uniqueness(result.selectors)) * 10)
 		}
 
 		return outcome
@@ -36,11 +39,11 @@ export const guards: Guard[] = [
 		const outcome = {
 			id: 'DeclarationDuplications',
 			score: 0,
-			value: 1 - result.declarations.uniquenessRatio,
+			value: 1 - uniqueness(result.declarations),
 		}
 
-		if (result.declarations.uniquenessRatio < 0.66) {
-			outcome.score = Math.floor((1 - result.declarations.uniquenessRatio) * 10)
+		if (uniqueness(result.declarations) < 0.66) {
+			outcome.score = Math.floor((1 - uniqueness(result.declarations)) * 10)
 		}
 
 		return outcome
@@ -67,11 +70,11 @@ export const guards: Guard[] = [
 	// Should not contain too much embedded content
 	// Deduct 1 point for every 250 bytes
 	(result: Analysis) => {
-		const { size } = result.stylesheet.embeddedContent
+		const { size } = result.stylesheet.embedded
 		return {
 			id: 'TooMuchEmbeddedContent',
-			score: Math.min(20, Math.floor(size.total / 250)),
-			value: size.total,
+			score: Math.min(20, Math.floor(size / 250)),
+			value: size,
 		}
 	},
 ]
